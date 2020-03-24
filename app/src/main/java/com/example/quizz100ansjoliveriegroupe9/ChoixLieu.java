@@ -1,25 +1,23 @@
 package com.example.quizz100ansjoliveriegroupe9;
 
-import androidx.appcompat.app.AppCompatActivity;
-import android.content.Context;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.database.sqlite.SQLiteOpenHelper;
-
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class ChoixLieu extends AppCompatActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.lieu_layout);
 
+
+
+
+        Button btnReturn = (Button) findViewById(R.id.btnReturn);
         Button btnNext = (Button) findViewById(R.id.btnNext);
 
 
@@ -28,16 +26,22 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 switch (v.getId()) {
                     //Boutons permettant d'ouvrir les différentes activitiés
-                    case R.id.btnNext:
-                        Intent intent = new Intent(MainActivity.this, ChoixLieu.class);
+                    case R.id.btnReturn:
+                        Intent intent = new Intent(ChoixLieu.this, MainActivity.class);
                         startActivity(intent);
                         break;
-
+                    case R.id.btnNext:
+                        //Intent intent2 = new Intent(ChoixLieu.this, x.class);
+                        //startActivity(intent2);
+                        break;
                 }
+
+
             }
         };
-
+        btnReturn.setOnClickListener(ecouteurAccueil);
         btnNext.setOnClickListener(ecouteurAccueil);
+
 
     }
 }

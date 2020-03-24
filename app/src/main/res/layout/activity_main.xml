@@ -17,5 +17,25 @@
             android:layout_height="wrap_content"
             android:text="Quizz des 100 ans de la Joliverie"
             android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/textViewName"
+            android:layout_width="match_parent"
+            android:layout_height="100px"
+            android:text="Prénom :" />
+
+        <EditText
+            android:id="@+id/Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"/>
+
+        <Button
+            android:id="@+id/btnNext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Suivant" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
