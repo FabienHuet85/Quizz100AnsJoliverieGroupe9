@@ -2,13 +2,8 @@ package com.example.quizz100ansjoliveriegroupe9;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
-
-import com.example.quizz100ansjoliveriegroupe9.Question;
-import com.example.quizz100ansjoliveriegroupe9.Reponse;
-import com.example.quizz100ansjoliveriegroupe9.Theme;
 
 public class BDAdapter {
     private static final String TAG = "BDAdapter";
@@ -55,36 +50,6 @@ public class BDAdapter {
     public BDAdapter  close(){
         db.close();
         return null;
-    }
-
-    public long insererQuestion (Question uneQuestion){
-        //Création d'un ContentValues (fonctionne comme une HashMap)
-        ContentValues values = new ContentValues();
-        //on lui ajoute une valeur associé à une clé (qui est le nom de la colonne où on veut mettre la valeur)
-        values.put(COL_TEXT_QUESTION, uneQuestion.getLibelleQuestion());
-        //on insère l'objet dans la BDD via le ContentValues
-        return db.insert(TABLE_QUESTION, null, values);
-    }
-
-    public long insererReponse (Reponse uneReponse){
-        //Création d'un ContentValues (fonctionne comme une HashMap)
-        ContentValues values = new ContentValues();
-        //on lui ajoute une valeur associé à une clé (qui est le nom de la colonne où on veut mettre la valeur)
-        values.put(COL_TEXT_REPONSE, uneReponse.getLibelleReponse());
-        values.put(COL_BOOLEAN_REPONSE, uneReponse.getVraiFauxReponse());
-        //on insère l'objet dans la BDD via le ContentValues
-        return db.insert(TABLE_REPONSE, null, values);
-    }
-
-    public long insererTheme (Theme unTheme){
-        Log.d(TAG, "récupération du lieu dans insererLieu : " + unTheme);
-        //Création d'un ContentValues (fonctionne comme une HashMap)
-        ContentValues values = new ContentValues();
-        //on lui ajoute une valeur associé à une clé (qui est le nom de la colonne où on veut mettre la valeur)
-        values.put(COL_TEXT_THEME, unTheme.getLibelleTheme());
-        Log.d(TAG, "values : " + values.toString());
-        //on insère l'objet dans la BDD via le ContentValues
-        return db.insert(TABLE_THEME, null, values);
     }
 
 

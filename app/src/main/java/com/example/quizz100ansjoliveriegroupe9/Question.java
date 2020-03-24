@@ -13,7 +13,6 @@ public class Question {
     public Question(int idQuestion, String libelleQuestion, int idLaReponse, int idLeTheme){
         this.idQuestion=idQuestion;
         this.libelleQuestion=libelleQuestion;
-        this.idLaReponse=idLaReponse;
         this.idLeTheme=idLeTheme;
     }
 

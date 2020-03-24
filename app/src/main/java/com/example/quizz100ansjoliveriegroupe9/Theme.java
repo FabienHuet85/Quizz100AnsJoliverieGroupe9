@@ -5,9 +5,6 @@ public class Theme {
     String libelleTheme;
 
     //Construteurs
-    public Theme(){
-
-    }
     public Theme(int idTheme, String libelleTheme){
         this.idTheme=idTheme;
         this.libelleTheme=libelleTheme;
@@ -23,7 +20,6 @@ public class Theme {
     }
 
     //Getters
-
     public int getIdTheme() {
         return this.idTheme;
     }

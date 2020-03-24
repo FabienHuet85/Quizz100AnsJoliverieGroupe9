@@ -4,15 +4,17 @@ public class Reponse {
     int idReponse;
     String libelleReponse;
     Boolean vraiFauxReponse;
+    int idLaQuestion;
 
     //Construteurs
     public Reponse(){
 
     }
-    public Reponse(int idQuestion, String libelleQuestion, Boolean VraiFauxReponse){
+    public Reponse(int idQuestion, String libelleQuestion, Boolean VraiFauxReponse, int idLaQuestion){
         this.idReponse=idReponse;
         this.libelleReponse=libelleReponse;
         this.vraiFauxReponse=VraiFauxReponse;
+        this.idLaQuestion=idLaQuestion;
     }
 
     //Setters
@@ -23,7 +25,7 @@ public class Reponse {
     public void setLibelleReponse(String libelleQuestion){
         this.libelleReponse=libelleReponse;
     }
-    
+
     public void setVraiFauxReponse(Boolean vraiFauxReponse){
         this.vraiFauxReponse=vraiFauxReponse;
     }
@@ -39,5 +41,9 @@ public class Reponse {
 
     public Boolean getVraiFauxReponse() {
         return this.vraiFauxReponse;
+    }
+
+    public int idLaQuestion() {
+        return this.idLaQuestion;
     }
 }
