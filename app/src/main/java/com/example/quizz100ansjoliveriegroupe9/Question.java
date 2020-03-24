@@ -3,14 +3,18 @@ package com.example.quizz100ansjoliveriegroupe9;
 public class Question {
     int idQuestion;
     String libelleQuestion;
+    int idLaReponse;
+    int idLeTheme;
 
     //Construteurs
     public Question(){
 
     }
-    public Question(int idQuestion, String libelleQuestion){
+    public Question(int idQuestion, String libelleQuestion, int idLaReponse, int idLeTheme){
         this.idQuestion=idQuestion;
         this.libelleQuestion=libelleQuestion;
+        this.idLaReponse=idLaReponse;
+        this.idLeTheme=idLeTheme;
     }
 
     //Setters

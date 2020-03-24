@@ -25,8 +25,8 @@ public class CreateBDQuizz extends SQLiteOpenHelper{
     private static final String COL_TEXT_THEME = "libelle_theme";
 
     //création des requetes sql pour créer les tables
-    private static final String CREATE_QUESTION_TABLE = "CREATE TABLE " + TABLE_QUESTION + " (" + COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"+ COL_TEXT_QUESTION + " TEXT NOT NULL);";
-    private static final String CREATE_REPONSE_TABLE = "CREATE TABLE " + TABLE_REPONSE + " (" + COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+ COL_TEXT_REPONSE + " TEXT NOT NULL " + COL_BOOLEAN_REPONSE + " BOOLEAN NOT NULL);";
+    private static final String CREATE_QUESTION_TABLE = "CREATE TABLE " + TABLE_QUESTION + " (" + COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"+ COL_TEXT_QUESTION + " TEXT NOT NULL," + "idLaReponse INT, idLeTheme INT, CONSTRAINT fk_question_theme FOREIGN KEY (idLeTheme) REFERENCES Theme(idTheme), CONSTRAINT fk_question_reponse FOREIGN KEY (idLaReponse) REFERENCES Reponse(idReponse)); ";
+    private static final String CREATE_REPONSE_TABLE = "CREATE TABLE " + TABLE_REPONSE + " (" + COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+ COL_TEXT_REPONSE + " TEXT NOT NULL ," + COL_BOOLEAN_REPONSE + " BOOLEAN NOT NULL);";
     private static final String CREATE_THEME_TABLE = "CREATE TABLE " + TABLE_THEME + " (" + COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"+ COL_TEXT_THEME + " TEXT NOT NULL);";
 
     //constructeur paramétré
