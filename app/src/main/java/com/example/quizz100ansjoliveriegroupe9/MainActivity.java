@@ -20,6 +20,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        BDAdapter bd = new BDAdapter(this);
+        bd.open();
+
+        Theme unTheme = new Theme (1, "Nantes");
+        Theme unTheme2 = new Theme (2, "Paris");
+
+        bd.insererTheme(unTheme);
+        bd.insererTheme(unTheme2);
+
+        bd.close();
         Button btnNext = (Button) findViewById(R.id.btnNext);
 
 

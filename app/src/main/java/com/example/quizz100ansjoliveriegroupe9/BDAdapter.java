@@ -15,16 +15,26 @@ public class BDAdapter {
 
     static final String COL_ID = "_id";
     static final int NUM_COL_ID = 0;
+
+    //Champ de la table Question
     static final String COL_TEXT_QUESTION = "libelle_question";
     static final int NUM_COL_TEXT_QUESTION = 1;
+    static final String COL_IDLAREPONSE_QUESTION = "id_la_reponse";
+    static final int NUM_COL_IDLAREPONSE_QUESTION = 2;
+    static final String COL_IDLETHEME_QUESTION = "id_le_theme";
+    static final int NUM_IDLETHEME_QUESTION = 3;
+
+    //Champ de la table Reponse
     static final String COL_TEXT_REPONSE = "libelle_reponse";
-    static final int NUM_COL_TEXT_REPONSE = 2;
-    static final String COL_BOOLEAN_REPONSE = "vraifaux_reponse";
-    static final int NUM_COL_BOOLEAN_REPONSE = 3;
+    static final int NUM_COL_TEXT_REPONSE = 4;
+    static final String COL_VRAIXFAUX_REPONSE = "vraixfaux_reponse";
+    static final int NUM_COL_VRAIXFAUX_REPONSE = 5;
+    static final String COL_IDLAQUESTION_REPONSE = "id_la_question";
+    static final int NUM_COL_IDLAQUESTION_REPONSE = 6;
+
+    //Champ de la table Theme
     static final String COL_TEXT_THEME = "libelle_theme";
-    static final int NUM_COL_TEXT_THEME = 4;
-
-
+    static final int NUM_COL_TEXT_THEME = 7;
 
 
     private CreateBDQuizz bdQuizz;
@@ -52,6 +62,31 @@ public class BDAdapter {
         return null;
     }
 
+    public long insererQuestion (Question uneQuestion){
+        //Création d'un ContentValues (fonctionne comme une HashMap)
+        ContentValues values = new ContentValues();
+        //on lui ajoute une valeur associé à une clé (qui est le nom de la colonne où on veut mettre la valeur)
+        values.put(COL_TEXT_QUESTION, uneQuestion.getLibelleQuestion());
+        //on insère l'objet dans la BDD via le ContentValues
+        return db.insert(TABLE_QUESTION, null, values);
+    }
+    public long insererTheme (Theme unTheme) {
+        Log.d(TAG, "récupération du theme dans insererTheme : " + unTheme);
+        //Création d'un ContentValues (fonctionne comme une HashMap)
+        ContentValues values = new ContentValues();
+        //on lui ajoute une valeur associé à une clé (qui est le nom de la colonne où on veut mettre la valeur)
+        values.put(COL_TEXT_THEME, unTheme.getLibelleTheme());
+        Log.d(TAG, "values : " + values.toString());
+        //on insère l'objet dans la BDD via le ContentValues
+        return db.insert(TABLE_THEME, null, values);
+    }
 
-
+    public long insererReponse (Reponse uneReponse){
+        //Création d'un ContentValues (fonctionne comme une HashMap)
+        ContentValues values = new ContentValues();
+        //on lui ajoute une valeur associé à une clé (qui est le nom de la colonne où on veut mettre la valeur)
+        values.put(COL_TEXT_REPONSE, uneReponse.getLibelleReponse());
+        //on insère l'objet dans la BDD via le ContentValues
+        return db.insert(TABLE_REPONSE, null, values);
+    }
 }

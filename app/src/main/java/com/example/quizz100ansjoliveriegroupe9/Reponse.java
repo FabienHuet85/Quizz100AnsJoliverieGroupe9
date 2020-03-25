@@ -7,9 +7,6 @@ public class Reponse {
     int idLaQuestion;
 
     //Construteurs
-    public Reponse(){
-
-    }
     public Reponse(int idQuestion, String libelleQuestion, Boolean VraiFauxReponse, int idLaQuestion){
         this.idReponse=idReponse;
         this.libelleReponse=libelleReponse;
