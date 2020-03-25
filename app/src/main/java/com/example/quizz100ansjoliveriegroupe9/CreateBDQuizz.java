@@ -14,7 +14,7 @@ public class CreateBDQuizz extends SQLiteOpenHelper{
     //Les différentes tables de la bdd
     static final String TABLE_QUESTION = "table_question";
     static final String TABLE_REPONSE = "table_reponse";
-    static final String TABLE_THEME = "table_theme";
+    static final String TABLE_THEME = "TABLE_THEME";
 
     //colonnes communes a chaque table
     private static final String COL_ID = "_id";
@@ -22,21 +22,21 @@ public class CreateBDQuizz extends SQLiteOpenHelper{
     //colonnes des différentes tables
     //Table question
     private static final String COL_TEXT_QUESTION = "libelle_question";
-    private static final String COL_TEXT_IDLAREPONSE = "idlareponse";
+    private static final String COL_TEXT_IDLAREPONSE = "idlareponse"; //Id bonne réponse
     private static final String COL_TEXT_IDLETHEME = "idletheme";
 
     //table reponse
     private static final String COL_TEXT_REPONSE = "libelle_reponse";
-    private static final String COL_BOOLEAN_REPONSE = "vraifaux_reponse";
     private static final String COL_TEXT_IDLAQUESTION = "idLaQuestion";
+    // Si l'id de la response de notre question est le nôtre, on est vrai sinon on est faux
 
     //table theme
     private static final String COL_TEXT_THEME = "libelle_theme";
 
     //création des requetes sql pour créer les tables
-    private static final String CREATE_QUESTION_TABLE = "CREATE TABLE " + TABLE_QUESTION + " (" + COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"+ COL_TEXT_QUESTION + " TEXT NOT NULL," + COL_TEXT_IDLAREPONSE + " INT NOT NULL," + COL_TEXT_IDLETHEME + " INT NOT NULL );";
-    private static final String CREATE_REPONSE_TABLE = "CREATE TABLE " + TABLE_REPONSE + " (" + COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+ COL_TEXT_REPONSE + " TEXT NOT NULL ," + COL_BOOLEAN_REPONSE + " BOOLEAN NOT NULL ," + COL_TEXT_IDLAQUESTION + " INT NOT NULL );";
-    private static final String CREATE_THEME_TABLE = "CREATE TABLE " + TABLE_THEME + " (" + COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"+ COL_TEXT_THEME + " TEXT NOT NULL);";
+    private static final String CREATE_QUESTION_TABLE = "CREATE TABLE " + TABLE_QUESTION + " (" + COL_ID + " INTEGER PRIMARY KEY UNIQUE,"+ COL_TEXT_QUESTION + " TEXT NOT NULL," + COL_TEXT_IDLAREPONSE + " INT NOT NULL," + COL_TEXT_IDLETHEME + " INT NOT NULL );";
+    private static final String CREATE_REPONSE_TABLE = "CREATE TABLE " + TABLE_REPONSE + " (" + COL_ID + " INTEGER PRIMARY KEY UNIQUE, "+ COL_TEXT_REPONSE + " TEXT NOT NULL ," + COL_TEXT_IDLAQUESTION + " INT NOT NULL );";
+    public static final String CREATE_THEME_TABLE = "CREATE TABLE " + TABLE_THEME + " (" + COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"+ COL_TEXT_THEME + " TEXT NOT NULL);";
 
     //constructeur paramétré
     public CreateBDQuizz(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {

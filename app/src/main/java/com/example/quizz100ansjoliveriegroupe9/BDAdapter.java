@@ -2,6 +2,7 @@ package com.example.quizz100ansjoliveriegroupe9;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
@@ -11,7 +12,7 @@ public class BDAdapter {
     private static final String NOM_BDD = "quizz.db";
     static final String TABLE_QUESTION = "table_question";
     static final String TABLE_REPONSE = "table_reponse";
-    static final String TABLE_THEME = "table_theme";
+    static final String TABLE_THEME = "TABLE_THEME";
 
     static final String COL_ID = "_id";
     static final int NUM_COL_ID = 0;
@@ -38,12 +39,10 @@ public class BDAdapter {
 
 
     private CreateBDQuizz bdQuizz;
-    private Context context;
     private SQLiteDatabase db;
 
     //le constructeur
-    public BDAdapter (Context context){
-        this.context = context;
+    public BDAdapter(Context context) {
         bdQuizz = new CreateBDQuizz(context, NOM_BDD, null, VERSION_BDD);
     }
 
@@ -53,16 +52,17 @@ public class BDAdapter {
     // de données en cache, nouvellement ouverte, nouvellement créée ou mise à jour
 
     //les méthodes d'instance
-    public BDAdapter  open(){
+    public BDAdapter open() {
         db = bdQuizz.getWritableDatabase();
         return this;
     }
-    public BDAdapter  close(){
+
+    public BDAdapter close() {
         db.close();
         return null;
     }
 
-    public long insererQuestion (Question uneQuestion){
+    public long insererQuestion(Question uneQuestion) {
         //Création d'un ContentValues (fonctionne comme une HashMap)
         ContentValues values = new ContentValues();
         //on lui ajoute une valeur associé à une clé (qui est le nom de la colonne où on veut mettre la valeur)
@@ -70,23 +70,46 @@ public class BDAdapter {
         //on insère l'objet dans la BDD via le ContentValues
         return db.insert(TABLE_QUESTION, null, values);
     }
-    public long insererTheme (Theme unTheme) {
+
+    public long insererTheme(Theme unTheme) {
         Log.d(TAG, "récupération du theme dans insererTheme : " + unTheme);
         //Création d'un ContentValues (fonctionne comme une HashMap)
         ContentValues values = new ContentValues();
         //on lui ajoute une valeur associé à une clé (qui est le nom de la colonne où on veut mettre la valeur)
+//        values.put("_id", unTheme.getIdTheme()); // Automatique
         values.put(COL_TEXT_THEME, unTheme.getLibelleTheme());
         Log.d(TAG, "values : " + values.toString());
         //on insère l'objet dans la BDD via le ContentValues
         return db.insert(TABLE_THEME, null, values);
     }
 
-    public long insererReponse (Reponse uneReponse){
+    public long insererReponse(Reponse uneReponse) {
         //Création d'un ContentValues (fonctionne comme une HashMap)
         ContentValues values = new ContentValues();
         //on lui ajoute une valeur associé à une clé (qui est le nom de la colonne où on veut mettre la valeur)
         values.put(COL_TEXT_REPONSE, uneReponse.getLibelleReponse());
         //on insère l'objet dans la BDD via le ContentValues
         return db.insert(TABLE_REPONSE, null, values);
+    }
+
+
+    public Cursor getLibelleTheme(int id_theme) {
+        return db.rawQuery("SELECT * FROM TABLE_THEME WHERE TABLE_THEME._id =" + id_theme, null);
+    }
+
+    public Cursor getAllLibelleTheme() {
+        return db.rawQuery("SELECT * FROM " + TABLE_THEME, null);
+    }
+
+    public void deleteAll() {
+        db.delete(TABLE_THEME, null, null);
+    }
+
+    public SQLiteDatabase getDb() {
+        return db;
+    }
+
+    public void createTableTheme() {
+        this.db.execSQL(CreateBDQuizz.CREATE_THEME_TABLE);
     }
 }
