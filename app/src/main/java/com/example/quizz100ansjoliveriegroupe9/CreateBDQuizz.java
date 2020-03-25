@@ -72,7 +72,8 @@ public class CreateBDQuizz extends SQLiteOpenHelper{
         //on lui ajoute une valeur associé à une clé (qui est le nom de la colonne où on veut mettre la valeur)
         values.put(COL_TEXT_QUESTION, uneQuestion.getLibelleQuestion());
         //on insère l'objet dans la BDD via le ContentValues
-        return db.insert(TABLE_QUESTION, null, values);
+        //return db.insert(TABLE_QUESTION, null, values);
+        return 0;
     }
 
     public long insererReponse (Reponse uneReponse){
@@ -82,7 +83,8 @@ public class CreateBDQuizz extends SQLiteOpenHelper{
         values.put(COL_TEXT_REPONSE, uneReponse.getLibelleReponse());
         values.put(COL_BOOLEAN_REPONSE, uneReponse.getVraiFauxReponse());
         //on insère l'objet dans la BDD via le ContentValues
-        return db.insert(TABLE_REPONSE, null, values);
+        //return db.insert(TABLE_REPONSE, null, values);
+        return 0;
     }
 
     public long insererTheme (Theme unTheme){
@@ -93,6 +95,7 @@ public class CreateBDQuizz extends SQLiteOpenHelper{
         values.put(COL_TEXT_THEME, unTheme.getLibelleTheme());
         Log.d(TAG, "values : " + values.toString());
         //on insère l'objet dans la BDD via le ContentValues
-        return db.insert(TABLE_THEME, null, values);
+        //return db.insert(TABLE_THEME, null, values);
+        return 0;
     }
 }

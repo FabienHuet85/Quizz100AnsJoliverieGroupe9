@@ -14,14 +14,11 @@ public class ChoixLieu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lieu_layout);
 
-
-
-
         Button btnReturn = (Button) findViewById(R.id.btnReturn);
         Button btnNext = (Button) findViewById(R.id.btnNext);
 
 
-        View.OnClickListener ecouteurAccueil = new View.OnClickListener() {
+        View.OnClickListener ecouteurLieu = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 switch (v.getId()) {
@@ -31,16 +28,16 @@ public class ChoixLieu extends AppCompatActivity {
                         startActivity(intent);
                         break;
                     case R.id.btnNext:
-                        //Intent intent2 = new Intent(ChoixLieu.this, x.class);
-                        //startActivity(intent2);
+                        Intent intent2 = new Intent(ChoixLieu.this, Question.class);
+                        startActivity(intent2);
                         break;
                 }
 
 
             }
         };
-        btnReturn.setOnClickListener(ecouteurAccueil);
-        btnNext.setOnClickListener(ecouteurAccueil);
+        btnReturn.setOnClickListener(ecouteurLieu);
+        btnNext.setOnClickListener(ecouteurLieu);
 
 
     }
