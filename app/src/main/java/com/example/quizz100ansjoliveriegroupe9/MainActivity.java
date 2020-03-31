@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import com.example.quizz100ansjoliveriegroupe9.BDAdapter;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -26,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
         System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
         Cursor c1 = bd.getAllLibelleTheme();
         Cursor test = bd.getLibelleTheme(1);
+
+
 
         Cursor c = bd.getAllLibelleTheme();
 
