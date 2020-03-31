@@ -3,14 +3,14 @@ package com.example.quizz100ansjoliveriegroupe9;
 public class Reponse {
     int idReponse;
     String libelleReponse;
-    Boolean vraiFauxReponse;
+    //Boolean vraiFauxReponse;
     int idLaQuestion;
 
     //Construteurs
-    public Reponse(int idQuestion, String libelleQuestion, Boolean VraiFauxReponse, int idLaQuestion){
+    public Reponse(int idReponse, String libelleReponse, int idLaQuestion){
         this.idReponse=idReponse;
         this.libelleReponse=libelleReponse;
-        this.vraiFauxReponse=VraiFauxReponse;
+        //this.vraiFauxReponse=VraiFauxReponse;
         this.idLaQuestion=idLaQuestion;
     }
 
@@ -19,13 +19,13 @@ public class Reponse {
         this.idReponse=idReponse;
     }
 
-    public void setLibelleReponse(String libelleQuestion){
+    public void setLibelleReponse(String libelleReponse){
         this.libelleReponse=libelleReponse;
     }
 
-    public void setVraiFauxReponse(Boolean vraiFauxReponse){
+    /*public void setVraiFauxReponse(Boolean vraiFauxReponse){
         this.vraiFauxReponse=vraiFauxReponse;
-    }
+    }*/
     //Getters
 
     public int getIdReponse() {
@@ -36,9 +36,10 @@ public class Reponse {
         return this.libelleReponse;
     }
 
+    /*
     public Boolean getVraiFauxReponse() {
         return this.vraiFauxReponse;
-    }
+    }*/
 
     public int idLaQuestion() {
         return this.idLaQuestion;

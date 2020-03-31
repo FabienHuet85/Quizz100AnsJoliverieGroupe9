@@ -54,6 +54,7 @@ public class Question extends AppCompatActivity {
         this.idQuestion=idQuestion;
         this.libelleQuestion=libelleQuestion;
         this.idLeTheme=idLeTheme;
+        this.idLaReponse=idLaReponse;
     }
 
     //Setters

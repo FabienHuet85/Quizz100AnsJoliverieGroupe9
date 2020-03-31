@@ -8,7 +8,7 @@ import android.util.Log;
 
 public class BDAdapter {
     private static final String TAG = "BDAdapter";
-    static final int VERSION_BDD = 2;
+    static final int VERSION_BDD = 3;
     private static final String NOM_BDD = "quizz.db";
     static final String TABLE_QUESTION = "table_question";
     static final String TABLE_REPONSE = "table_reponse";
@@ -28,14 +28,16 @@ public class BDAdapter {
     //Champ de la table Reponse
     static final String COL_TEXT_REPONSE = "libelle_reponse";
     static final int NUM_COL_TEXT_REPONSE = 4;
+    /*
     static final String COL_VRAIXFAUX_REPONSE = "vraixfaux_reponse";
     static final int NUM_COL_VRAIXFAUX_REPONSE = 5;
+     */
     static final String COL_IDLAQUESTION_REPONSE = "id_la_question";
-    static final int NUM_COL_IDLAQUESTION_REPONSE = 6;
+    static final int NUM_COL_IDLAQUESTION_REPONSE = 5;
 
     //Champ de la table Theme
     static final String COL_TEXT_THEME = "libelle_theme";
-    static final int NUM_COL_TEXT_THEME = 7;
+    static final int NUM_COL_TEXT_THEME = 6;
 
 
     private CreateBDQuizz bdQuizz;

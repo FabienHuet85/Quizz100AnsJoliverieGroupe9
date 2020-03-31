@@ -28,7 +28,7 @@ public class CreateBDQuizz extends SQLiteOpenHelper{
     //table reponse
     private static final String COL_TEXT_REPONSE = "libelle_reponse";
     private static final String COL_TEXT_IDLAQUESTION = "idLaQuestion";
-    // Si l'id de la response de notre question est le nôtre, on est vrai sinon on est faux
+    //Si l'id de la response de notre question est le nôtre, on est vrai sinon on est faux
 
     //table theme
     private static final String COL_TEXT_THEME = "libelle_theme";
