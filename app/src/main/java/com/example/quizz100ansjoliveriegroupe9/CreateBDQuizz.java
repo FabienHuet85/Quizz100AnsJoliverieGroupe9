@@ -65,6 +65,12 @@ public class CreateBDQuizz extends SQLiteOpenHelper{
 
         onCreate(db);
     }
+
+    public static void DeleteAllTable(SQLiteDatabase db){
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_QUESTION + ";");
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_REPONSE + ";");
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_THEME + ";");
+    }
 /*
     public long insererQuestion (Question uneQuestion){
         //Création d'un ContentValues (fonctionne comme une HashMap)
