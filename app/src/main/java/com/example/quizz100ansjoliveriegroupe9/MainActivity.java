@@ -6,10 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import com.example.quizz100ansjoliveriegroupe9.BDAdapter;
-import com.example.quizz100ansjoliveriegroupe9.CreateBDQuizz;
-import android.database.sqlite.SQLiteDatabase;
-
-
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -26,11 +22,11 @@ public class MainActivity extends AppCompatActivity {
         BDAdapter bd = new BDAdapter(this);
         bd.open();
 
-        
-
         InsertData.insertData(this);
-        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 
+        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+        Cursor c1 = bd.getAllLibelleTheme();
+        Cursor test = bd.getLibelleTheme(1);
 
 
 

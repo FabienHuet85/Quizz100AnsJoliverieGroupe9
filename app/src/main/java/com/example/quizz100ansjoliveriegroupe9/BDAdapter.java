@@ -8,8 +8,8 @@ import android.util.Log;
 
 public class BDAdapter {
     private static final String TAG = "BDAdapter";
-    static final int VERSION_BDD = 3;
-    private static final String NOM_BDD = "quizz.db";
+    static final int VERSION_BDD = 1;
+    private static final String NOM_BDD = "quizz100.db";
     static final String TABLE_QUESTION = "table_question";
     static final String TABLE_REPONSE = "table_reponse";
     static final String TABLE_THEME = "TABLE_THEME";
@@ -100,7 +100,11 @@ public class BDAdapter {
     }
 
     public Cursor getAllLibelleTheme() {
-        return db.rawQuery("SELECT * FROM " + TABLE_THEME, null);
+        return db.rawQuery("SELECT * FROM TABLE_THEME;", null);
+    }
+
+    public Cursor getAllLibelleQuestion() {
+        return db.rawQuery("SELECT * FROM TABLE_THEME;",null);
     }
 
     public void deleteAll() {
