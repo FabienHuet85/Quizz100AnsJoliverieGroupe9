@@ -20,6 +20,14 @@
         <activity
             android:name=".ChoixLieu">
         </activity>
+        <activity
+            android:name=".Question">
+        </activity>
+        <activity
+            android:name=".Reponse">
+        </activity>
+        <activity
+            android:name=".Theme">
+        </activity>
     </application>
-*
 </manifest>
