@@ -35,7 +35,7 @@ public class ChoixLieu extends AppCompatActivity {
         LieuBdd.open();
 
         //Curseur pour
-        Cursor cursor = LieuBdd.getAllLibelleQuestion();
+        Cursor cursor = LieuBdd.getAllLibelleTheme();
 
         //Boucle pour l'import des valeurs dans la liste déroulante :
         if(cursor.getCount() > 0){

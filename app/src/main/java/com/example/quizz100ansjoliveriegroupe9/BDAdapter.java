@@ -100,11 +100,12 @@ public class BDAdapter {
     }
 
     public Cursor getAllLibelleTheme() {
+
         return db.rawQuery("SELECT * FROM TABLE_THEME;", null);
     }
 
     public Cursor getAllLibelleQuestion() {
-        return db.rawQuery("SELECT * FROM TABLE_THEME;",null);
+        return db.rawQuery("SELECT * FROM table_question;",null);
     }
 
     public void deleteAll() {
