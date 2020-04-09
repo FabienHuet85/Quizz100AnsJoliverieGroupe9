@@ -125,4 +125,12 @@ public class Question extends AppCompatActivity {
     public String getLibelleQuestion() {
         return this.libelleQuestion;
     }
+
+    public int getIdLaReponse() {
+        return this.idLaReponse;
+    }
+
+    public int getIdLeTheme(){
+        return this.idLeTheme;
+    }
 }

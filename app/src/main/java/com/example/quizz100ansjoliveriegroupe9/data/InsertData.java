@@ -13,8 +13,8 @@ public class InsertData {
     public static void insertData(MainActivity context) {
         adapter = new BDAdapter(context);
         adapter.open();
-        InsertData.insertTheme();
-        InsertData.insertQuestion();
+        //InsertData.insertTheme();
+        //InsertData.insertQuestion();
         InsertData.insertReponse();
     }
 

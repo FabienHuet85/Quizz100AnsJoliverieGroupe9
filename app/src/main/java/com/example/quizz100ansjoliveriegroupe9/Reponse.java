@@ -41,7 +41,7 @@ public class Reponse {
         return this.vraiFauxReponse;
     }*/
 
-    public int idLaQuestion() {
+    public int getIdLaQuestion() {
         return this.idLaQuestion;
     }
 }

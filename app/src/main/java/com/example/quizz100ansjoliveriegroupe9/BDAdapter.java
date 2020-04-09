@@ -20,9 +20,9 @@ public class BDAdapter {
     //Champ de la table Question
     static final String COL_TEXT_QUESTION = "libelle_question";
     static final int NUM_COL_TEXT_QUESTION = 1;
-    static final String COL_IDLAREPONSE_QUESTION = "id_la_reponse";
+    static final String COL_IDLAREPONSE_QUESTION = "idlareponse";
     static final int NUM_COL_IDLAREPONSE_QUESTION = 2;
-    static final String COL_IDLETHEME_QUESTION = "idLeTheme";
+    static final String COL_IDLETHEME_QUESTION = "idletheme";
     static final int NUM_IDLETHEME_QUESTION = 3;
 
     //Champ de la table Reponse
@@ -32,7 +32,7 @@ public class BDAdapter {
     static final String COL_VRAIXFAUX_REPONSE = "vraixfaux_reponse";
     static final int NUM_COL_VRAIXFAUX_REPONSE = 5;
      */
-    static final String COL_IDLAQUESTION_REPONSE = "id_la_question";
+    static final String COL_IDLAQUESTION_REPONSE = "idLaQuestion";
     static final int NUM_COL_IDLAQUESTION_REPONSE = 5;
 
     //Champ de la table Theme
@@ -69,6 +69,9 @@ public class BDAdapter {
         ContentValues values = new ContentValues();
         //on lui ajoute une valeur associé à une clé (qui est le nom de la colonne où on veut mettre la valeur)
         values.put(COL_TEXT_QUESTION, uneQuestion.getLibelleQuestion());
+        values.put("_id", uneQuestion.getIdQuestion());
+        values.put(COL_IDLAREPONSE_QUESTION, uneQuestion.getIdLaReponse());
+        values.put(COL_IDLETHEME_QUESTION, uneQuestion.getIdLeTheme());
         //on insère l'objet dans la BDD via le ContentValues
         return db.insert(TABLE_QUESTION, null, values);
     }
@@ -80,6 +83,9 @@ public class BDAdapter {
         //on lui ajoute une valeur associé à une clé (qui est le nom de la colonne où on veut mettre la valeur)
 //        values.put("_id", unTheme.getIdTheme()); // Automatique
         values.put(COL_TEXT_THEME, unTheme.getLibelleTheme());
+        values.put(COL_TEXT_THEME, unTheme.getLibelleTheme());
+        values.put(COL_TEXT_THEME, unTheme.getLibelleTheme());
+        values.put(COL_TEXT_THEME, unTheme.getLibelleTheme());
         Log.d(TAG, "values : " + values.toString());
         //on insère l'objet dans la BDD via le ContentValues
         return db.insert(TABLE_THEME, null, values);
@@ -89,7 +95,9 @@ public class BDAdapter {
         //Création d'un ContentValues (fonctionne comme une HashMap)
         ContentValues values = new ContentValues();
         //on lui ajoute une valeur associé à une clé (qui est le nom de la colonne où on veut mettre la valeur)
+        values.put("_id", uneReponse.getIdReponse());
         values.put(COL_TEXT_REPONSE, uneReponse.getLibelleReponse());
+        values.put(COL_IDLAQUESTION_REPONSE, uneReponse.getIdLaQuestion());
         //on insère l'objet dans la BDD via le ContentValues
         return db.insert(TABLE_REPONSE, null, values);
     }
@@ -110,6 +118,10 @@ public class BDAdapter {
     }
 
     //requêtes liées aux questions
+    public Cursor getAllQuestions() {
+        return db.rawQuery("SELECT * FROM table_question;", null);
+    }
+
     public Cursor getAllQuestionsWithThemeId(int id_theme) {
         return db.rawQuery("SELECT * FROM TABLE_QUESTION WHERE "+COL_IDLETHEME_QUESTION+" = "+id_theme, null);
     }
@@ -123,6 +135,10 @@ public class BDAdapter {
     }
 
     //requêtes liées aux réponses
+    public Cursor getAllReponse() {
+        return db.rawQuery("SELECT * FROM TABLE_REPONSE;", null);
+    }
+
     public Cursor getAllReponses(int id_question) {
         return db.rawQuery("SELECT * FROM TABLE_REPONSE WHERE "+COL_IDLAQUESTION_REPONSE+" = "+id_question, null);
     }

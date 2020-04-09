@@ -26,16 +26,27 @@ public class MainActivity extends AppCompatActivity {
 
         System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
         Cursor c1 = bd.getAllLibelleTheme();
-        Cursor test = bd.getLibelleTheme(1);
+        //Cursor test = bd.getLibelleTheme(1);
 
 
 
         Cursor c = bd.getAllLibelleTheme();
-
+        Cursor question = bd.getAllQuestions();
+        Cursor reponse = bd.getAllReponse();
         while (c.moveToNext()) {
             System.out.println("Entrée : " + c.getInt(0) + " / " + c.getString(1));
         }
         System.out.println("Nombre d'entrée : " + c.getCount());
+
+        System.out.println("--------------------------");
+
+
+        System.out.println("Nombre de questions: " + question.getCount());
+        System.out.println("--------------------------");
+
+
+        System.out.println("Nombre de réponses: " + reponse.getCount());
+
 
         Button btnNext = (Button) findViewById(R.id.btnNext);
 
