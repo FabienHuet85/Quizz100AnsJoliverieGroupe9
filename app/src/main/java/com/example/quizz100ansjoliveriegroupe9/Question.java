@@ -34,10 +34,10 @@ public class Question extends AppCompatActivity {
         Button btnReturn = (Button) findViewById(R.id.btnReturn);
         Button btnNext = (Button) findViewById(R.id.btnNext);
 
-        Button rep1 = (Button) findViewById(R.id.Reponse1);
-        Button rep2 = (Button) findViewById(R.id.Reponse2);
-        Button rep3 = (Button) findViewById(R.id.Reponse3);
-        Button rep4 = (Button) findViewById(R.id.Reponse3);
+        final Button rep1 = (Button) findViewById(R.id.Reponse1);
+        final Button rep2 = (Button) findViewById(R.id.Reponse2);
+        final Button rep3 = (Button) findViewById(R.id.Reponse3);
+        final Button rep4 = (Button) findViewById(R.id.Reponse4);
 
 
         //Création d'une liste pour les elément dans le spinner
@@ -47,29 +47,28 @@ public class Question extends AppCompatActivity {
         LieuBdd.open();
         //Curseur question
         int a = 3; // valeur recu precedente
-        Cursor Question = LieuBdd.getAllReponses(a);
+        Cursor Reponse = LieuBdd.getAllReponses(a);
 
         //System.out.println(Question.getString(Integer.parseInt(Question.getColumnName(0))));
 
         int i = 0;
-        System.out.println(Question.getCount());
+        System.out.println(Reponse.getCount());
 
-        String rep = "rep";
+       ArrayList<String> reponse = new ArrayList<>();
 
-
-
-        if (Question.getCount() > 0) {
-            while (Question.moveToNext()) {
-                String num = "1";
-                String reponse = rep.concat(num);
-
-                if (rep1.getText().equals("")) {
-
-                    rep1.setText("ziojzoifjziojf");
-                }
-
-
+        if (Reponse.getCount() > 0) {
+            while (Reponse.moveToNext()) {
+                System.out.println(Reponse.getString(1));
+                reponse.add(Reponse.getString(1));
             }
+        }
+
+        rep1.setText(reponse.get(0));
+        rep2.setText(reponse.get(1));
+        rep3.setText(reponse.get(2));
+        rep4.setText(reponse.get(3));
+        System.out.println(reponse.get(3));
+
 
 
             //fermeture de la bdd
@@ -92,6 +91,10 @@ public class Question extends AppCompatActivity {
                             if (i == 0) {
                                 Intent intent2 = new Intent(Question.this, Question.class);
                                 startActivity(intent2);
+                                rep1.setText("");
+                                rep2.setText("");
+                                rep3.setText("");
+                                rep4.setText("");
                             } else {
                                 Toast.makeText(Question.this, "ERREUR - Veuillez selectionner un lieu", Toast.LENGTH_LONG).show();
                             }
@@ -105,7 +108,6 @@ public class Question extends AppCompatActivity {
             btnReturn.setOnClickListener(ecouteurQuestion);
             btnNext.setOnClickListener(ecouteurQuestion);
         }
-    }
 
 
     public Question(){
