@@ -117,15 +117,20 @@ public class BDAdapter {
     //requêtes liées aux questions
 
     public Cursor getAllQuestionsWithThemeId(int id_theme) {
-        return db.rawQuery("SELECT * FROM TABLE_QUESTION WHERE "+COL_IDLETHEME_QUESTION+" = "+id_theme, null);
+        return db.rawQuery("SELECT * FROM table_question WHERE "+COL_IDLETHEME_QUESTION+" = "+id_theme, null);
     }
 
     public Cursor getLibelleQuestionId(int idquestion, int id_theme) {
-        return db.rawQuery("SELECT * FROM TABLE_QUESTION WHERE TABLE_QUESTION._id =" + idquestion+" AND "+COL_IDLETHEME_QUESTION+" = "+id_theme,null);
+        return db.rawQuery("SELECT * FROM table_question WHERE TABLE_QUESTION._id = " + idquestion+" AND "+COL_IDLETHEME_QUESTION+" = "+id_theme,null);
     }
 
     public Cursor getOneQuestion(int idquestion){
-        return db.rawQuery("SELECT * FROM table_question WHERE table_question._id="+ idquestion,null);
+        return db.rawQuery("SELECT * FROM table_question WHERE table_question._id = "+ idquestion,null);
+    }
+
+    public Cursor getIdQuestion(){
+        return db.rawQuery("SELECT * ",null);
+
     }
 
     //requêtes liées aux réponses

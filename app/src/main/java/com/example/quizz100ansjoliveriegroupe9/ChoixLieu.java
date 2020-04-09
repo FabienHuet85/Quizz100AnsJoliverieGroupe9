@@ -26,10 +26,10 @@ public class ChoixLieu extends AppCompatActivity {
         //Instanciation des éléments d'après ce qui est dans lieu_layout
         Button btnReturn = (Button) findViewById(R.id.btnReturn);
         Button btnNext = (Button) findViewById(R.id.btnNext);
-        Spinner spinner = (Spinner) findViewById(R.id.Lieu);
+        final Spinner spinner = (Spinner) findViewById(R.id.Lieu);
 
         //Création d'une liste pour les elément dans le spinner
-        List spinnerTheme = new ArrayList();
+        final List spinnerTheme = new ArrayList();
         BDAdapter LieuBdd = new BDAdapter(ChoixLieu.this);
         //Ouverture de la BDD
         LieuBdd.open();
@@ -69,7 +69,9 @@ public class ChoixLieu extends AppCompatActivity {
                         break;
                     case R.id.btnNext:
                         if (i == 0){
-                        Intent intent2 = new Intent(ChoixLieu.this, Question.class);
+                            int id_theme_selectionne = spinner.getSelectedItem().toString();
+
+                            Intent intent2 = new Intent(ChoixLieu.this, Question.class);
                         startActivity(intent2);
                         }else{
                             Toast.makeText(ChoixLieu.this, "ERREUR - Veuillez selectionner un lieu",Toast.LENGTH_LONG).show();

@@ -46,23 +46,31 @@ public class Question extends AppCompatActivity {
         //Ouverture de la BDD
         LieuBdd.open();
         //Curseur question
-        int a = 3; // valeur recu precedente
-        Cursor Reponse = LieuBdd.getAllReponses(a);
+        int a = 2; // valeur recu precedente (thème)
+        Cursor Question = LieuBdd.getAllQuestionsWithThemeId(a);
+
+        System.out.println("----------------------------");
+        System.out.println(Question.getCount());
+        System.out.println("----------------------------");
+
 
         //System.out.println(Question.getString(Integer.parseInt(Question.getColumnName(0))));
 
-        int i = 0;
-        System.out.println(Reponse.getCount());
+
+        //System.out.println(Reponse.getCount());
 
        ArrayList<String> reponse = new ArrayList<>();
 
-        if (Reponse.getCount() > 0) {
-            while (Reponse.moveToNext()) {
-                System.out.println(Reponse.getString(1));
-                reponse.add(Reponse.getString(1));
+        if (Question.getCount() > 0) {
+            while (Question.moveToNext()) {
+                int b = Question.getInt(0);
+                Cursor Reponse = LieuBdd.getAllReponses(b);
+                while (Reponse.moveToNext()) {
+                    System.out.println(Reponse.getString(1));
+                    reponse.add(Reponse.getString(1));
+                }
             }
         }
-
         rep1.setText(reponse.get(0));
         rep2.setText(reponse.get(1));
         rep3.setText(reponse.get(2));
