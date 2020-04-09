@@ -109,6 +109,10 @@ public class BDAdapter {
         return db.rawQuery("SELECT * FROM TABLE_THEME;", null);
     }
 
+    public Cursor getIdThemeWithLibelle(String libelle_theme){
+        return db.rawQuery("SELECT * FROM TABLE_THEME WHERE libelle_theme = '"+ libelle_theme+"'", null);
+    }
+
     public Cursor getAllLibelleQuestion() {
 
         return db.rawQuery("SELECT * FROM table_question;", null);

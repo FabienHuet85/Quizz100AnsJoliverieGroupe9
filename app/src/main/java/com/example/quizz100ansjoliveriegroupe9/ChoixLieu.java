@@ -69,10 +69,14 @@ public class ChoixLieu extends AppCompatActivity {
                         break;
                     case R.id.btnNext:
                         if (i == 0){
-                            int id_theme_selectionne = spinner.getSelectedItem().toString();
+                            String nom_theme_selectionne = spinner.getSelectedItem().toString();
 
                             Intent intent2 = new Intent(ChoixLieu.this, Question.class);
-                        startActivity(intent2);
+                            Bundle bundle = new Bundle();
+                            bundle.putString("nom_theme_selec ", nom_theme_selectionne);
+                            intent2.putExtra("nom_theme_selec",nom_theme_selectionne);
+                            intent2.putExtras(bundle);
+                            startActivity(intent2);
                         }else{
                             Toast.makeText(ChoixLieu.this, "ERREUR - Veuillez selectionner un lieu",Toast.LENGTH_LONG).show();
                         }
