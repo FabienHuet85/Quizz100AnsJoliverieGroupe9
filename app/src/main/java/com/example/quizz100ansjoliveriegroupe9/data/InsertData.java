@@ -15,7 +15,7 @@ public class InsertData {
         adapter.open();
         //InsertData.insertTheme();
         //InsertData.insertQuestion();
-        InsertData.insertReponse();
+        //InsertData.insertReponse();
     }
 
     private static void insertTheme() {

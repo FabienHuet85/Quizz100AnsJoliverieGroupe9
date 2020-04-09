@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         Cursor c = bd.getAllLibelleTheme();
         Cursor question = bd.getAllQuestions();
         Cursor reponse = bd.getAllReponse();
+        Cursor questionAvecTheme = bd.getAllQuestionsWithThemeId(1);
         while (c.moveToNext()) {
             System.out.println("Entrée : " + c.getInt(0) + " / " + c.getString(1));
         }
@@ -42,11 +43,23 @@ public class MainActivity extends AppCompatActivity {
 
 
         System.out.println("Nombre de questions: " + question.getCount());
+        while (question.moveToNext()) {
+            System.out.println("Entrée : " + question.getInt(0) + " / " + question.getString(1)+ " / " + question.getInt(2)+ " / " + question.getInt(3));
+        }
         System.out.println("--------------------------");
 
 
         System.out.println("Nombre de réponses: " + reponse.getCount());
+        while (reponse.moveToNext()) {
+            System.out.println("Entrée : " + reponse.getInt(0) + " / " + reponse.getString(1)+ " / " + reponse.getInt(2));
+        }
+        System.out.println("--------------------------");
+        System.out.println("Chopper une question en relation avec un thème :");
 
+        questionAvecTheme.moveToNext();
+        System.out.println("Question : " + questionAvecTheme.getInt(0) + " / " + questionAvecTheme.getString(1)+ " / " + questionAvecTheme.getInt(2)+ " / " + questionAvecTheme.getInt(3));
+        questionAvecTheme.moveToNext();
+        System.out.println("Question : " + questionAvecTheme.getInt(0) + " / " + questionAvecTheme.getString(1)+ " / " + questionAvecTheme.getInt(2)+ " / " + questionAvecTheme.getInt(3));
 
         Button btnNext = (Button) findViewById(R.id.btnNext);
 
