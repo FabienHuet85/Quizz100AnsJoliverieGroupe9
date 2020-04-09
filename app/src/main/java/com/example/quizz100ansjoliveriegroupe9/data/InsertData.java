@@ -5,6 +5,9 @@ import com.example.quizz100ansjoliveriegroupe9.MainActivity;
 import com.example.quizz100ansjoliveriegroupe9.Question;
 import com.example.quizz100ansjoliveriegroupe9.Reponse;
 import com.example.quizz100ansjoliveriegroupe9.Theme;
+import android.database.Cursor;
+import com.example.quizz100ansjoliveriegroupe9.BDAdapter;
+
 
 public class InsertData {
 
@@ -13,9 +16,20 @@ public class InsertData {
     public static void insertData(MainActivity context) {
         adapter = new BDAdapter(context);
         adapter.open();
-        //InsertData.insertTheme();
-        //InsertData.insertQuestion();
-        //InsertData.insertReponse();
+
+        Cursor testTheme = adapter.getAllLibelleTheme();
+        Cursor testQuestion = adapter.getAllLibelleTheme();
+        Cursor testReponse = adapter.getAllLibelleTheme();
+        if (testTheme.getCount() == 0){
+            InsertData.insertTheme();
+        }
+        if (testQuestion.getCount() == 0){
+            InsertData.insertQuestion();
+        }
+        if (testReponse.getCount() == 0){
+            InsertData.insertReponse();
+        }
+
     }
 
     private static void insertTheme() {
