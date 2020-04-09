@@ -17,9 +17,12 @@ public class InsertData {
         adapter = new BDAdapter(context);
         adapter.open();
 
+        //adapter.deleteAll();
+
         Cursor testTheme = adapter.getAllLibelleTheme();
-        Cursor testQuestion = adapter.getAllLibelleTheme();
-        Cursor testReponse = adapter.getAllLibelleTheme();
+        Cursor testQuestion = adapter.getAllLibelleQuestion();
+        Cursor testReponse = adapter.getAllReponse();
+
         if (testTheme.getCount() == 0){
             InsertData.insertTheme();
         }

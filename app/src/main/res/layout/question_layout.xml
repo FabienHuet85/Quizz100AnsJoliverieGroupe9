@@ -25,19 +25,19 @@
             android:layout_height="60dp"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/Reponse_1"
+            <Button
+                android:id="@+id/Reponse1"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Question 1" />
+                android:text="" />
 
-            <TextView
-                android:id="@+id/Reponse_2"
+            <Button
+                android:id="@+id/Reponse2"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Question 2" />
+                android:text="" />
         </LinearLayout>
 
         <LinearLayout
@@ -45,19 +45,19 @@
             android:layout_height="250px"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/Reponse_3"
+            <Button
+                android:id="@+id/Reponse3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Question 3" />
+                android:text="" />
 
-            <TextView
-                android:id="@+id/Reponse_4"
+            <Button
+                android:id="@+id/Reponse4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Reponse" />
+                android:text="" />
         </LinearLayout>
 
     </LinearLayout>

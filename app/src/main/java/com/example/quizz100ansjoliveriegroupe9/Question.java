@@ -33,7 +33,12 @@ public class Question extends AppCompatActivity {
         //Instanciation des éléments d'après ce qui est dans lieu_layout
         Button btnReturn = (Button) findViewById(R.id.btnReturn);
         Button btnNext = (Button) findViewById(R.id.btnNext);
-        TextView question = (TextView) findViewById(R.id.Question);
+
+        Button rep1 = (Button) findViewById(R.id.Reponse1);
+        Button rep2 = (Button) findViewById(R.id.Reponse2);
+        Button rep3 = (Button) findViewById(R.id.Reponse3);
+        Button rep4 = (Button) findViewById(R.id.Reponse3);
+
 
         //Création d'une liste pour les elément dans le spinner
         BDAdapter LieuBdd = new BDAdapter(Question.this);
@@ -41,60 +46,66 @@ public class Question extends AppCompatActivity {
         //Ouverture de la BDD
         LieuBdd.open();
         //Curseur question
-         Cursor c = LieuBdd.getAllLibelleTheme();
+        int a = 3; // valeur recu precedente
+        Cursor Question = LieuBdd.getAllReponses(a);
 
-         //System.out.println(Question.getString(Integer.parseInt(Question.getColumnName(0))));
+        //System.out.println(Question.getString(Integer.parseInt(Question.getColumnName(0))));
 
+        int i = 0;
+        System.out.println(Question.getCount());
 
-
-        // set text dans le textview :
-
-
-        while (c.moveToNext()) {
-            System.out.println("tessssssssst");
-            System.out.println("Entrée : " + c.getInt(0) + " / " + c.getString(1));
-        }
+        String rep = "rep";
 
 
 
-        //                question.setText(Question.getString("libelle_question"));
+        if (Question.getCount() > 0) {
+            while (Question.moveToNext()) {
+                String num = "1";
+                String reponse = rep.concat(num);
 
+                if (rep1.getText().equals("")) {
 
-
-        //fermeture de la bdd
-        LieuBdd.close();
-
-        View.OnClickListener ecouteurQuestion = new View.OnClickListener() {
-
-            int i=0;
-
-            @Override
-            public void onClick(View v) {
-                switch (v.getId()) {
-
-                    //Boutons permettant d'ouvrir les différentes activitiés
-                    case R.id.btnReturn:
-                        Intent intent = new Intent(Question.this, MainActivity.class);
-                        startActivity(intent);
-                        break;
-                    case R.id.btnNext:
-                        if (i == 0){
-                            Intent intent2 = new Intent(Question.this, Question.class);
-                            startActivity(intent2);
-                        }else{
-                            Toast.makeText(Question.this, "ERREUR - Veuillez selectionner un lieu",Toast.LENGTH_LONG).show();
-                        }
-                        break;
+                    rep1.setText("ziojzoifjziojf");
                 }
 
 
             }
-        };
 
-        btnReturn.setOnClickListener(ecouteurQuestion);
-        btnNext.setOnClickListener(ecouteurQuestion);
+
+            //fermeture de la bdd
+            LieuBdd.close();
+
+            View.OnClickListener ecouteurQuestion = new View.OnClickListener() {
+
+                int i = 0;
+
+                @Override
+                public void onClick(View v) {
+                    switch (v.getId()) {
+
+                        //Boutons permettant d'ouvrir les différentes activitiés
+                        case R.id.btnReturn:
+                            Intent intent = new Intent(Question.this, MainActivity.class);
+                            startActivity(intent);
+                            break;
+                        case R.id.btnNext:
+                            if (i == 0) {
+                                Intent intent2 = new Intent(Question.this, Question.class);
+                                startActivity(intent2);
+                            } else {
+                                Toast.makeText(Question.this, "ERREUR - Veuillez selectionner un lieu", Toast.LENGTH_LONG).show();
+                            }
+                            break;
+                    }
+
+
+                }
+            };
+
+            btnReturn.setOnClickListener(ecouteurQuestion);
+            btnNext.setOnClickListener(ecouteurQuestion);
+        }
     }
-
 
 
     public Question(){

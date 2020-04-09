@@ -83,9 +83,6 @@ public class BDAdapter {
         //on lui ajoute une valeur associé à une clé (qui est le nom de la colonne où on veut mettre la valeur)
 //        values.put("_id", unTheme.getIdTheme()); // Automatique
         values.put(COL_TEXT_THEME, unTheme.getLibelleTheme());
-        values.put(COL_TEXT_THEME, unTheme.getLibelleTheme());
-        values.put(COL_TEXT_THEME, unTheme.getLibelleTheme());
-        values.put(COL_TEXT_THEME, unTheme.getLibelleTheme());
         Log.d(TAG, "values : " + values.toString());
         //on insère l'objet dans la BDD via le ContentValues
         return db.insert(TABLE_THEME, null, values);
@@ -118,9 +115,6 @@ public class BDAdapter {
     }
 
     //requêtes liées aux questions
-    public Cursor getAllQuestions() {
-        return db.rawQuery("SELECT * FROM table_question;", null);
-    }
 
     public Cursor getAllQuestionsWithThemeId(int id_theme) {
         return db.rawQuery("SELECT * FROM TABLE_QUESTION WHERE "+COL_IDLETHEME_QUESTION+" = "+id_theme, null);
