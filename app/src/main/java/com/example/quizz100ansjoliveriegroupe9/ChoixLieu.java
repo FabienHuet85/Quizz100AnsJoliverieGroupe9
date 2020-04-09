@@ -70,7 +70,7 @@ public class ChoixLieu extends AppCompatActivity {
                     case R.id.btnNext:
                         if (i == 0){
                             String nom_theme_selectionne = spinner.getSelectedItem().toString();
-
+                            //test
                             Intent intent2 = new Intent(ChoixLieu.this, Question.class);
                             Bundle bundle = new Bundle();
                             bundle.putString("nom_theme_selec ", nom_theme_selectionne);

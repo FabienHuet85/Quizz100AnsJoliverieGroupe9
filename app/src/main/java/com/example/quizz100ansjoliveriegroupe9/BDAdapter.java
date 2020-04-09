@@ -8,7 +8,7 @@ import android.util.Log;
 
 public class BDAdapter {
     private static final String TAG = "BDAdapter";
-    static final int VERSION_BDD = 2;
+    static final int VERSION_BDD = 3;
     private static final String NOM_BDD = "quizz100.db";
     static final String TABLE_QUESTION = "table_question";
     static final String TABLE_REPONSE = "table_reponse";
@@ -98,7 +98,7 @@ public class BDAdapter {
         //on insère l'objet dans la BDD via le ContentValues
         return db.insert(TABLE_REPONSE, null, values);
     }
-
+//test
 
     public Cursor getLibelleTheme(int id_theme) {
         return db.rawQuery("SELECT * FROM TABLE_THEME WHERE TABLE_THEME._id =" + id_theme, null);
