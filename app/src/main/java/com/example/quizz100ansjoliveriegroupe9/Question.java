@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.quizz100ansjoliveriegroupe9.data.InsertData;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,17 +36,29 @@ public class Question extends AppCompatActivity {
         TextView question = (TextView) findViewById(R.id.Question);
 
         //Création d'une liste pour les elément dans le spinner
-        List spinnerTheme = new ArrayList();
         BDAdapter LieuBdd = new BDAdapter(Question.this);
+
         //Ouverture de la BDD
         LieuBdd.open();
+        //Curseur question
+         Cursor c = LieuBdd.getAllLibelleTheme();
 
-        //Curseur pour
-        Cursor cursor = LieuBdd.getAllLibelleQuestion();
+         //System.out.println(Question.getString(Integer.parseInt(Question.getColumnName(0))));
 
-        //Boucle pour l'import des valeurs dans la liste déroulante :
 
-        //question.addTextChangedListener();
+
+        // set text dans le textview :
+
+
+        while (c.moveToNext()) {
+            System.out.println("tessssssssst");
+            System.out.println("Entrée : " + c.getInt(0) + " / " + c.getString(1));
+        }
+
+
+
+        //                question.setText(Question.getString("libelle_question"));
+
 
 
         //fermeture de la bdd

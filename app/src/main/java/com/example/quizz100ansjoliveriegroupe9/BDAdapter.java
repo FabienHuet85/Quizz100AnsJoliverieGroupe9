@@ -8,7 +8,7 @@ import android.util.Log;
 
 public class BDAdapter {
     private static final String TAG = "BDAdapter";
-    static final int VERSION_BDD = 1;
+    static final int VERSION_BDD = 2;
     private static final String NOM_BDD = "quizz100.db";
     static final String TABLE_QUESTION = "table_question";
     static final String TABLE_REPONSE = "table_reponse";
@@ -22,7 +22,7 @@ public class BDAdapter {
     static final int NUM_COL_TEXT_QUESTION = 1;
     static final String COL_IDLAREPONSE_QUESTION = "id_la_reponse";
     static final int NUM_COL_IDLAREPONSE_QUESTION = 2;
-    static final String COL_IDLETHEME_QUESTION = "id_le_theme";
+    static final String COL_IDLETHEME_QUESTION = "idLeTheme";
     static final int NUM_IDLETHEME_QUESTION = 3;
 
     //Champ de la table Reponse
@@ -105,8 +105,32 @@ public class BDAdapter {
     }
 
     public Cursor getAllLibelleQuestion() {
-        return db.rawQuery("SELECT * FROM table_question;",null);
+
+        return db.rawQuery("SELECT * FROM table_question;", null);
     }
+
+    //requêtes liées aux questions
+    public Cursor getAllQuestionsWithThemeId(int id_theme) {
+        return db.rawQuery("SELECT * FROM TABLE_QUESTION WHERE "+COL_IDLETHEME_QUESTION+" = "+id_theme, null);
+    }
+
+    public Cursor getLibelleQuestionId(int idquestion, int id_theme) {
+        return db.rawQuery("SELECT * FROM TABLE_QUESTION WHERE TABLE_QUESTION._id =" + idquestion+" AND "+COL_IDLETHEME_QUESTION+" = "+id_theme,null);
+    }
+
+    public Cursor getOneQuestion(int idquestion){
+        return db.rawQuery("SELECT * FROM table_question WHERE table_question._id="+ idquestion,null);
+    }
+
+    //requêtes liées aux réponses
+    public Cursor getAllReponses(int id_question) {
+        return db.rawQuery("SELECT * FROM TABLE_REPONSE WHERE "+COL_IDLAQUESTION_REPONSE+" = "+id_question, null);
+    }
+
+    public Cursor getLibelleReponsesId(int id_reponse, int id_question) {
+        return db.rawQuery("SELECT * FROM table_question WHERE TABLE_REPONSE._id = " + id_reponse +" WHERE "+COL_IDLAQUESTION_REPONSE+" = "+id_question,null);
+    }
+
 
     public void deleteAll() {
         db.delete(TABLE_THEME, null, null);
