@@ -31,27 +31,16 @@ public class Question extends AppCompatActivity {
         setContentView(R.layout.question_layout);
 
         Bundle bundle = getIntent().getExtras();
-        String test = bundle.getString("nom_theme_selec");
-        ArrayList<String> question = bundle.getStringArrayList("listeQuestion");
-        ArrayList<String> reponse = bundle.getStringArrayList("listeReponse");
-        int indiceFenetreOuverte = bundle.getInt("indice_fenetre");
-        System.out.println(test);
-        System.out.println(question);
-        System.out.println(reponse);
-        System.out.println(indiceFenetreOuverte);
+        final String nom_theme_selectionne = bundle.getString("nom_theme_selec");
+        final ArrayList<String> question = bundle.getStringArrayList("listeQuestion");
+        final ArrayList<String> reponse = bundle.getStringArrayList("listeReponse");
+        final int indiceFenetreOuverte = bundle.getInt("indice_fenetre");
 
-        int indice = 0;
-        if (indiceFenetreOuverte == 0){
-            indice = indiceFenetreOuverte;
-        }else{
 
-        }
         System.out.println("//////////////////");
 
 
         //Instanciation des éléments d'après ce qui est dans lieu_layout
-        Button btnReturn = (Button) findViewById(R.id.btnReturn);
-        Button btnNext = (Button) findViewById(R.id.btnNext);
         TextView TextViewQuestion = (TextView) findViewById (R.id.Question);
         final Button rep1 = (Button) findViewById(R.id.Reponse1);
         final Button rep2 = (Button) findViewById(R.id.Reponse2);
@@ -59,9 +48,11 @@ public class Question extends AppCompatActivity {
         final Button rep4 = (Button) findViewById(R.id.Reponse4);
 
         //récupération de la question
-        question.get(indice);
+        question.get(indiceFenetreOuverte);
 
-        TextViewQuestion.setText(question.get(indice));
+        TextViewQuestion.setText(question.get(indiceFenetreOuverte));
+
+        
         rep1.setText(reponse.get(0));
         rep2.setText(reponse.get(1));
         rep3.setText(reponse.get(2));
@@ -76,6 +67,15 @@ public class Question extends AppCompatActivity {
 
                     //Boutons permettant d'ouvrir les différentes activitiés
                     case R.id.Reponse1:
+                        final int indicefenetresuivant = indiceFenetreOuverte+1;
+                        Intent intent = new Intent(Question.this, Question.class);
+                        intent.putExtra("nom_theme_selec",nom_theme_selectionne);
+                        intent.putExtra("listeQuestion",question);
+                        intent.putExtra("listeReponse",reponse);
+                        intent.putExtra("indice_fenetre",indicefenetresuivant);
+                        intent.putExtra("listeBonneReponse",reponse);
+
+                        startActivity(intent);
 
                         break;
                     case R.id.Reponse2:
@@ -100,40 +100,15 @@ public class Question extends AppCompatActivity {
 
 
 
-        View.OnClickListener ecouteurQuestion = new View.OnClickListener() {
 
-            int i = 0;
-
-            @Override
-            public void onClick(View v) {
-                switch (v.getId()) {
-
-                    //Boutons permettant d'ouvrir les différentes activitiés
-                    case R.id.btnReturn:
-                        Intent intent = new Intent(Question.this, ChoixLieu.class);
-                        startActivity(intent);
-                        break;
-                    case R.id.btnNext:
-                        if (i == 0) {
-                            Intent intent2 = new Intent(Question.this, Question.class);
-                            startActivity(intent2);
-                            rep1.setText("");
-                            rep2.setText("");
-                            rep3.setText("");
-                            rep4.setText("");
-                        } else {
-                            Toast.makeText(Question.this, "ERREUR - Veuillez selectionner un lieu", Toast.LENGTH_LONG).show();
-                        }
-                        break;
-                }
-
-
-            }
         };
 
+        /*
         btnReturn.setOnClickListener(ecouteurQuestion);
         btnNext.setOnClickListener(ecouteurQuestion);
-    }
+        */
+
+
 
 
     public Question() {
