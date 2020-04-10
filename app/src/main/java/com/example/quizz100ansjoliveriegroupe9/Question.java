@@ -32,7 +32,21 @@ public class Question extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         String test = bundle.getString("nom_theme_selec");
+        ArrayList<String> question = bundle.getStringArrayList("listeQuestion");
+        ArrayList<String> reponse = bundle.getStringArrayList("listeReponse");
+        int indiceFenetreOuverte = bundle.getInt("indice_fenetre");
         System.out.println(test);
+        System.out.println(question);
+        System.out.println(reponse);
+        System.out.println(indiceFenetreOuverte);
+
+        int indice = 0;
+        if (indiceFenetreOuverte == 0){
+            indice = indiceFenetreOuverte;
+        }else{
+
+        }
+        System.out.println("//////////////////");
 
 
         //Instanciation des éléments d'après ce qui est dans lieu_layout
@@ -44,53 +58,14 @@ public class Question extends AppCompatActivity {
         final Button rep3 = (Button) findViewById(R.id.Reponse3);
         final Button rep4 = (Button) findViewById(R.id.Reponse4);
 
+        //récupération de la question
+        question.get(indice);
 
-        //Création d'une liste pour les elément dans le spinner
-        BDAdapter LieuBdd = new BDAdapter(Question.this);
-
-        //Ouverture de la BDD
-        LieuBdd.open();
-
-        Cursor idtest = LieuBdd.getIdThemeWithLibelle(test);
-        System.out.println("/////////////////////////");
-        idtest.moveToNext();
-        int idthemeencours = idtest.getInt(0);
-        System.out.println(idthemeencours);
-        //Curseur question
-
-        Cursor Question = LieuBdd.getAllQuestionsWithThemeId(idthemeencours);
-
-        System.out.println("----------------------------");
-        System.out.println(Question.getCount());
-        System.out.println(idthemeencours);
-        System.out.println("----------------------------");
-
-
-
-        ArrayList<String> reponse = new ArrayList<>();
-        ArrayList<String> question = new ArrayList<>();
-
-        if (Question.getCount() > 0) {
-            while (Question.moveToNext()) {
-                int b = Question.getInt(0);
-                int idVraiReponse = Question.getInt(2);
-                question.add(Question.getString(1));
-                System.out.println("id vrai réponse pour question avec id :"+b+" : "+idVraiReponse);
-                Cursor Reponse = LieuBdd.getAllReponses(b);
-                while (Reponse.moveToNext()) {
-                    System.out.println(Reponse.getString(1));
-                    reponse.add(Reponse.getString(1));
-                }
-            }
-        }
-
-
-        TextViewQuestion.setText(question.get(0));
+        TextViewQuestion.setText(question.get(indice));
         rep1.setText(reponse.get(0));
         rep2.setText(reponse.get(1));
         rep3.setText(reponse.get(2));
         rep4.setText(reponse.get(3));
-        System.out.println(reponse.get(3));
 
         View.OnClickListener ecouteurLieu = new View.OnClickListener() {
 
@@ -123,18 +98,7 @@ public class Question extends AppCompatActivity {
 
 
 
-        //Systeme de point
 
-
-
-
-
-
-
-
-
-        //fermeture de la bdd
-        LieuBdd.close();
 
         View.OnClickListener ecouteurQuestion = new View.OnClickListener() {
 

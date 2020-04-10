@@ -34,7 +34,7 @@ public class ChoixLieu extends AppCompatActivity {
         //Ouverture de la BDD
         LieuBdd.open();
 
-        //Curseur pour
+        //Curseur pour obtenir touts les thèmes
         Cursor cursor = LieuBdd.getAllLibelleTheme();
 
         //Boucle pour l'import des valeurs dans la liste déroulante :
@@ -69,14 +69,81 @@ public class ChoixLieu extends AppCompatActivity {
                         break;
                     case R.id.btnNext:
                         if (i == 0){
+
+                            //Récupération du libellé du thème selectionner
                             String nom_theme_selectionne = spinner.getSelectedItem().toString();
-                            //test
+
+                            //Récupération de la BDD
+                            BDAdapter Bdd = new BDAdapter(ChoixLieu.this);
+
+                            //Ouverture de la BDD
+                            Bdd.open();
+
+                            //Récupération de l'id du thème sélectionner
+                            Cursor themeSelectionner = Bdd.getIdThemeWithLibelle(nom_theme_selectionne);
+                            themeSelectionner.moveToNext();
+                            int idThemeEnCours = themeSelectionner.getInt(0);
+
+                            //Récupération des questions en lien avec le thème sélectionner
+                            Cursor questionLieesAuThemeSelec = Bdd.getAllQuestionsWithThemeId(idThemeEnCours);
+
+                            //Récupération du nombre de questions
+                            int nbQuestion = questionLieesAuThemeSelec.getCount();
+
+                            //Déclaration des listes dans lesquelles on va stocker les questions et les réponses
+                            ArrayList<String> reponse = new ArrayList<>();
+                            int idVraiReponse [] = new int[nbQuestion];
+                            ArrayList<String> question = new ArrayList<>();
+
+
+                            //on parcours les questions liées au thème
+                            while(questionLieesAuThemeSelec.moveToNext()){
+                                i=0;
+                                //On récupère l'id des questions en lien avec le thème
+                                int idQuestionParcours = questionLieesAuThemeSelec.getInt(0);
+
+                                //On récupère l'id de la réponse qui est vrai sur les quatre question liée à la question
+                                //et on le stock dans le tableau qui a les id des bonnes réponses
+                                idVraiReponse[i] = questionLieesAuThemeSelec.getInt(2);
+
+                                //On ajoute le libellé de la question liée au thème dans la liste
+                                question.add(questionLieesAuThemeSelec.getString(1));
+
+                                //On récupère les quatre réponses liées à l'id de la question
+                                Cursor Reponse = Bdd.getAllReponses(idQuestionParcours);
+
+                                //On parcours les question pour stocker leur libellé dans une liste
+                                while (Reponse.moveToNext()) {
+                                    System.out.println(Reponse.getString(1));
+                                    reponse.add(Reponse.getString(1));
+                                }
+                            }
+
+                            int indiceFenêtreOuvert = 0;
+                            //Déclaration de l'intent pour envoyer des données dans l'autre interface
                             Intent intent2 = new Intent(ChoixLieu.this, Question.class);
+
+                            //Déclaration du bundle pour pouvoir envoyer les données dedans
                             Bundle bundle = new Bundle();
+
+                            //Insertion des données à envoyer dans le bundle
                             bundle.putString("nom_theme_selec ", nom_theme_selectionne);
+                            bundle.putStringArrayList("listeQuestion ", question);
+                            bundle.putStringArrayList("listeReponse ", reponse);
+                            bundle.putInt("indice_fenetre",indiceFenêtreOuvert);
+
                             intent2.putExtra("nom_theme_selec",nom_theme_selectionne);
+                            intent2.putExtra("listeQuestion",question);
+                            intent2.putExtra("listeReponse",reponse);
+                            intent2.putExtra("indice_fenetre",indiceFenêtreOuvert);
+                            intent2.putExtra("listeBonneReponse",idVraiReponse);
+
+                            //insertion des données à passer dans le intent
                             intent2.putExtras(bundle);
+
                             startActivity(intent2);
+
+
                         }else{
                             Toast.makeText(ChoixLieu.this, "ERREUR - Veuillez selectionner un lieu",Toast.LENGTH_LONG).show();
                         }
