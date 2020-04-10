@@ -146,7 +146,7 @@ public class ChoixLieu extends AppCompatActivity {
 
                             startActivity(intent2);
 
-
+                            //test
                         }else{
                             Toast.makeText(ChoixLieu.this, "ERREUR - Veuillez selectionner un lieu",Toast.LENGTH_LONG).show();
                         }

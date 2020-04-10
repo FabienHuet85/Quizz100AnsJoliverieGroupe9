@@ -38,6 +38,7 @@ public class Question extends AppCompatActivity {
 
         int indice2 = indiceFenetreOuverte;
 
+        //test
 
         //Instanciation des éléments d'après ce qui est dans lieu_layout
         TextView TextViewQuestion = (TextView) findViewById (R.id.Question);
