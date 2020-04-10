@@ -38,7 +38,7 @@ public class Question extends AppCompatActivity {
         //Instanciation des éléments d'après ce qui est dans lieu_layout
         Button btnReturn = (Button) findViewById(R.id.btnReturn);
         Button btnNext = (Button) findViewById(R.id.btnNext);
-
+        TextView TextViewQuestion = (TextView) findViewById (R.id.Question);
         final Button rep1 = (Button) findViewById(R.id.Reponse1);
         final Button rep2 = (Button) findViewById(R.id.Reponse2);
         final Button rep3 = (Button) findViewById(R.id.Reponse3);
@@ -68,11 +68,13 @@ public class Question extends AppCompatActivity {
 
 
         ArrayList<String> reponse = new ArrayList<>();
+        ArrayList<String> question = new ArrayList<>();
 
         if (Question.getCount() > 0) {
             while (Question.moveToNext()) {
                 int b = Question.getInt(0);
                 int idVraiReponse = Question.getInt(2);
+                question.add(Question.getString(1));
                 System.out.println("id vrai réponse pour question avec id :"+b+" : "+idVraiReponse);
                 Cursor Reponse = LieuBdd.getAllReponses(b);
                 while (Reponse.moveToNext()) {
@@ -83,7 +85,7 @@ public class Question extends AppCompatActivity {
         }
 
 
-
+        TextViewQuestion.setText(question.get(0));
         rep1.setText(reponse.get(0));
         rep2.setText(reponse.get(1));
         rep3.setText(reponse.get(2));

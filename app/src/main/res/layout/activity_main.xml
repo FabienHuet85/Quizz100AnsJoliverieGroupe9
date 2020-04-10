@@ -37,5 +37,12 @@
             android:layout_height="wrap_content"
             android:text="Suivant" />
 
+        <TextView
+            android:id="@+id/ErrorMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textAlignment="center" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

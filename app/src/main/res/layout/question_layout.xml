@@ -7,13 +7,15 @@
         android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="100px"
-        android:text="Question :" />
+        android:text="Question :"
+        android:textAlignment="center" />
 
     <TextView
         android:id="@+id/Question"
         android:layout_width="match_parent"
         android:layout_height="100px"
-        android:text="" />
+        android:text=""
+        android:textAlignment="center" />
 
     <LinearLayout
         android:layout_width="match_parent"
