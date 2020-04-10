@@ -93,6 +93,7 @@ public class ChoixLieu extends AppCompatActivity {
                             //Déclaration des listes dans lesquelles on va stocker les questions et les réponses
                             ArrayList<String> reponse = new ArrayList<>();
                             int idVraiReponse [] = new int[nbQuestion];
+                            ArrayList<String> bonneReponse = new ArrayList<>();
                             ArrayList<String> question = new ArrayList<>();
 
 
@@ -105,6 +106,8 @@ public class ChoixLieu extends AppCompatActivity {
                                 //On récupère l'id de la réponse qui est vrai sur les quatre question liée à la question
                                 //et on le stock dans le tableau qui a les id des bonnes réponses
                                 idVraiReponse[i] = questionLieesAuThemeSelec.getInt(2);
+                                String libelleBonneReponse = String.valueOf(idVraiReponse[i]);
+                                bonneReponse.add(libelleBonneReponse);
 
                                 //On ajoute le libellé de la question liée au thème dans la liste
                                 question.add(questionLieesAuThemeSelec.getString(1));
@@ -136,7 +139,7 @@ public class ChoixLieu extends AppCompatActivity {
                             intent2.putExtra("listeQuestion",question);
                             intent2.putExtra("listeReponse",reponse);
                             intent2.putExtra("indice_fenetre",indiceFenêtreOuvert);
-                            intent2.putExtra("listeBonneReponse",idVraiReponse);
+                            intent2.putExtra("listeBonneReponse",bonneReponse);
 
                             //insertion des données à passer dans le intent
                             intent2.putExtras(bundle);

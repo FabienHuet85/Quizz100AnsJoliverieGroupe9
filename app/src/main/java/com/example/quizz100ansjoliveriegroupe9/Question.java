@@ -31,13 +31,12 @@ public class Question extends AppCompatActivity {
         setContentView(R.layout.question_layout);
 
         Bundle bundle = getIntent().getExtras();
-        final String nom_theme_selectionne = bundle.getString("nom_theme_selec");
         final ArrayList<String> question = bundle.getStringArrayList("listeQuestion");
         final ArrayList<String> reponse = bundle.getStringArrayList("listeReponse");
         final int indiceFenetreOuverte = bundle.getInt("indice_fenetre");
-        int indice2 = indiceFenetreOuverte;
+        final  ArrayList<String> bonneReponse = bundle.getStringArrayList("listeBonneReponse");
 
-        System.out.println("//////////////////");
+        int indice2 = indiceFenetreOuverte;
 
 
         //Instanciation des éléments d'après ce qui est dans lieu_layout
@@ -62,23 +61,13 @@ public class Question extends AppCompatActivity {
         rep4.setText(reponse.get(indice2+3));
 
         View.OnClickListener ecouteurLieu = new View.OnClickListener() {
-
-
             @Override
             public void onClick(View BtnReponse) {
                 switch (BtnReponse.getId()) {
 
                     //Boutons permettant d'ouvrir les différentes activitiés
                     case R.id.Reponse1:
-                        final int indicefenetresuivant = indiceFenetreOuverte+1;
-                        Intent intent = new Intent(Question.this, Question.class);
-                        intent.putExtra("nom_theme_selec",nom_theme_selectionne);
-                        intent.putExtra("listeQuestion",question);
-                        intent.putExtra("listeReponse",reponse);
-                        intent.putExtra("indice_fenetre",indicefenetresuivant);
-                        intent.putExtra("listeBonneReponse",reponse);
 
-                        startActivity(intent);
 
                         break;
                     case R.id.Reponse2:
@@ -150,5 +139,17 @@ public class Question extends AppCompatActivity {
 
     public int getIdLeTheme() {
         return this.idLeTheme;
+    }
+
+    protected void test (String nom_theme_selectionne, int indiceFenetreOuverte,ArrayList question, ArrayList reponse, ArrayList listeBonneReponse ){
+        final int indicefenetresuivant = indiceFenetreOuverte+1;
+        Intent intent = new Intent(Question.this, Question.class);
+        intent.putExtra("nom_theme_selec",nom_theme_selectionne);
+        intent.putExtra("listeQuestion",question);
+        intent.putExtra("listeReponse",reponse);
+        intent.putExtra("indice_fenetre",indicefenetresuivant);
+        intent.putExtra("listeBonneReponse",reponse);
+
+        startActivity(intent);
     }
 }
