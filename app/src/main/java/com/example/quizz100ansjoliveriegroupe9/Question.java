@@ -61,25 +61,26 @@ public class Question extends AppCompatActivity {
         rep3.setText(reponse.get(indice2+2));
         rep4.setText(reponse.get(indice2+3));
 
+
         View.OnClickListener ecouteurLieu = new View.OnClickListener() {
             @Override
             public void onClick(View BtnReponse) {
+                int btn = 0;
                 switch (BtnReponse.getId()) {
 
                     //Boutons permettant d'ouvrir les différentes activitiés
                     case R.id.Reponse1:
 
-
+                        test(indiceFenetreOuverte, question, reponse, bonneReponse, rep1, bonneReponse);
                         break;
                     case R.id.Reponse2:
-
+                        test(indiceFenetreOuverte, question, reponse, bonneReponse, rep2, bonneReponse);
                         break;
                     case R.id.Reponse3:
-
+                        test(indiceFenetreOuverte, question, reponse, bonneReponse, rep3, bonneReponse);
                         break;
-
                     case R.id.Reponse4:
-
+                        test(indiceFenetreOuverte, question, reponse, bonneReponse, rep4, bonneReponse);
                         break;
                 }
             }
@@ -87,6 +88,9 @@ public class Question extends AppCompatActivity {
 
 
         rep1.setOnClickListener(ecouteurLieu);
+        rep2.setOnClickListener(ecouteurLieu);
+        rep3.setOnClickListener(ecouteurLieu);
+        rep4.setOnClickListener(ecouteurLieu);
 
 
 
@@ -142,14 +146,47 @@ public class Question extends AppCompatActivity {
         return this.idLeTheme;
     }
 
-    protected void test (String nom_theme_selectionne, int indiceFenetreOuverte,ArrayList question, ArrayList reponse, ArrayList listeBonneReponse ){
+    protected void test (int indiceFenetreOuverte,ArrayList question, ArrayList reponse, ArrayList listeBonneReponse, Button rep, ArrayList bonneReponse){
         final int indicefenetresuivant = indiceFenetreOuverte+1;
         Intent intent = new Intent(Question.this, Question.class);
-        intent.putExtra("nom_theme_selec",nom_theme_selectionne);
         intent.putExtra("listeQuestion",question);
         intent.putExtra("listeReponse",reponse);
         intent.putExtra("indice_fenetre",indicefenetresuivant);
         intent.putExtra("listeBonneReponse",reponse);
+
+        int tailleListBonneReponse = bonneReponse.size();
+
+        System.out.println(tailleListBonneReponse);
+
+
+        for(int j=0; j<tailleListBonneReponse;j++){
+            //Récupération du string de la réponse choisir
+            CharSequence reponseChoisie = rep.getText();
+            String reponseChoisieString = reponseChoisie.toString();
+
+            //Récupération de la BDD
+            BDAdapter Bdd = new BDAdapter(Question.this);
+
+            //Ouverture de la BDD
+            Bdd.open();
+
+            Cursor getidreponsewithlibelle = Bdd.getIdReponsesWithLibelleReponse(reponseChoisieString);
+            getidreponsewithlibelle.moveToNext();
+            int idReponseSelec = getidreponsewithlibelle.getInt(0);
+            String idStringReponseSelec = String.valueOf(idReponseSelec);
+
+            if((bonneReponse.get(j)).equals(idStringReponseSelec)){
+                Toast toast = Toast.makeText(this, "Bonne réponse", Toast.LENGTH_SHORT);
+                toast.show();
+            }else{
+                Toast toast = Toast.makeText(this, "Mauvaise réponse", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+
+        }
+
+        System.out.println(reponse.get(0));
+        System.out.println("----------------------");
 
         startActivity(intent);
     }

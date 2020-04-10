@@ -150,8 +150,13 @@ public class BDAdapter {
         return db.rawQuery("SELECT * FROM table_question WHERE TABLE_REPONSE._id = " + id_reponse +" WHERE "+COL_IDLAQUESTION_REPONSE+" = "+id_question,null);
     }
 
+    public Cursor getIdReponsesWithLibelleReponse(String libellereponse) {
+        return db.rawQuery("SELECT * FROM table_reponse WHERE "+COL_TEXT_REPONSE+" = '"+libellereponse+"'",null);
 
-    public void deleteAll() {
+    }
+
+
+        public void deleteAll() {
         db.delete(TABLE_THEME, null, null);
     }
 
