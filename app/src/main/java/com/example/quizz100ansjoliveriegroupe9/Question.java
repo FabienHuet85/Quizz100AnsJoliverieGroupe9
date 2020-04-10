@@ -2,6 +2,7 @@ package com.example.quizz100ansjoliveriegroupe9;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.CursorIndexOutOfBoundsException;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -29,6 +30,10 @@ public class Question extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.question_layout);
 
+        Bundle bundle = getIntent().getExtras();
+        String test = bundle.getString("nom_theme_selec");
+        System.out.println(test);
+
 
         //Instanciation des éléments d'après ce qui est dans lieu_layout
         Button btnReturn = (Button) findViewById(R.id.btnReturn);
@@ -45,25 +50,30 @@ public class Question extends AppCompatActivity {
 
         //Ouverture de la BDD
         LieuBdd.open();
+
+        Cursor idtest = LieuBdd.getIdThemeWithLibelle(test);
+        System.out.println("/////////////////////////");
+        idtest.moveToNext();
+        int idthemeencours = idtest.getInt(0);
+        System.out.println(idthemeencours);
         //Curseur question
-        int a = 2; // valeur recu precedente (thème)
-        Cursor Question = LieuBdd.getAllQuestionsWithThemeId(a);
+
+        Cursor Question = LieuBdd.getAllQuestionsWithThemeId(idthemeencours);
 
         System.out.println("----------------------------");
         System.out.println(Question.getCount());
+        System.out.println(idthemeencours);
         System.out.println("----------------------------");
 
 
-        //System.out.println(Question.getString(Integer.parseInt(Question.getColumnName(0))));
 
-
-        //System.out.println(Reponse.getCount());
-
-       ArrayList<String> reponse = new ArrayList<>();
+        ArrayList<String> reponse = new ArrayList<>();
 
         if (Question.getCount() > 0) {
             while (Question.moveToNext()) {
                 int b = Question.getInt(0);
+                int idVraiReponse = Question.getInt(2);
+                System.out.println("id vrai réponse pour question avec id :"+b+" : "+idVraiReponse);
                 Cursor Reponse = LieuBdd.getAllReponses(b);
                 while (Reponse.moveToNext()) {
                     System.out.println(Reponse.getString(1));
@@ -71,70 +81,113 @@ public class Question extends AppCompatActivity {
                 }
             }
         }
+
+
+
         rep1.setText(reponse.get(0));
         rep2.setText(reponse.get(1));
         rep3.setText(reponse.get(2));
         rep4.setText(reponse.get(3));
         System.out.println(reponse.get(3));
 
+        View.OnClickListener ecouteurLieu = new View.OnClickListener() {
 
 
-            //fermeture de la bdd
-            LieuBdd.close();
+            @Override
+            public void onClick(View BtnReponse) {
+                switch (BtnReponse.getId()) {
 
-            View.OnClickListener ecouteurQuestion = new View.OnClickListener() {
+                    //Boutons permettant d'ouvrir les différentes activitiés
+                    case R.id.Reponse1:
 
-                int i = 0;
+                        break;
+                    case R.id.Reponse2:
 
-                @Override
-                public void onClick(View v) {
-                    switch (v.getId()) {
+                        break;
+                    case R.id.Reponse3:
 
-                        //Boutons permettant d'ouvrir les différentes activitiés
-                        case R.id.btnReturn:
-                            Intent intent = new Intent(Question.this, MainActivity.class);
-                            startActivity(intent);
-                            break;
-                        case R.id.btnNext:
-                            if (i == 0) {
-                                Intent intent2 = new Intent(Question.this, Question.class);
-                                startActivity(intent2);
-                                rep1.setText("");
-                                rep2.setText("");
-                                rep3.setText("");
-                                rep4.setText("");
-                            } else {
-                                Toast.makeText(Question.this, "ERREUR - Veuillez selectionner un lieu", Toast.LENGTH_LONG).show();
-                            }
-                            break;
-                    }
+                        break;
 
+                    case R.id.Reponse4:
 
+                        break;
                 }
-            };
-
-            btnReturn.setOnClickListener(ecouteurQuestion);
-            btnNext.setOnClickListener(ecouteurQuestion);
-        }
+            }
+        };
 
 
-    public Question(){
+        rep1.setOnClickListener(ecouteurLieu);
+
+
+
+
+        //Systeme de point
+
+
+
+
+
+
+
+
+
+        //fermeture de la bdd
+        LieuBdd.close();
+
+        View.OnClickListener ecouteurQuestion = new View.OnClickListener() {
+
+            int i = 0;
+
+            @Override
+            public void onClick(View v) {
+                switch (v.getId()) {
+
+                    //Boutons permettant d'ouvrir les différentes activitiés
+                    case R.id.btnReturn:
+                        Intent intent = new Intent(Question.this, ChoixLieu.class);
+                        startActivity(intent);
+                        break;
+                    case R.id.btnNext:
+                        if (i == 0) {
+                            Intent intent2 = new Intent(Question.this, Question.class);
+                            startActivity(intent2);
+                            rep1.setText("");
+                            rep2.setText("");
+                            rep3.setText("");
+                            rep4.setText("");
+                        } else {
+                            Toast.makeText(Question.this, "ERREUR - Veuillez selectionner un lieu", Toast.LENGTH_LONG).show();
+                        }
+                        break;
+                }
+
+
+            }
+        };
+
+        btnReturn.setOnClickListener(ecouteurQuestion);
+        btnNext.setOnClickListener(ecouteurQuestion);
+    }
+
+
+    public Question() {
 
     }
-    public Question(int idQuestion, String libelleQuestion, int idLaReponse, int idLeTheme){
-        this.idQuestion=idQuestion;
-        this.libelleQuestion=libelleQuestion;
-        this.idLeTheme=idLeTheme;
-        this.idLaReponse=idLaReponse;
+
+    public Question(int idQuestion, String libelleQuestion, int idLaReponse, int idLeTheme) {
+        this.idQuestion = idQuestion;
+        this.libelleQuestion = libelleQuestion;
+        this.idLeTheme = idLeTheme;
+        this.idLaReponse = idLaReponse;
     }
 
     //Setters
-    public void setIdQuestion(int idQuestion){
-        this.idQuestion=idQuestion;
+    public void setIdQuestion(int idQuestion) {
+        this.idQuestion = idQuestion;
     }
 
-    public void setLibelleQuestion(String libelleQuestion){
-        this.libelleQuestion=libelleQuestion;
+    public void setLibelleQuestion(String libelleQuestion) {
+        this.libelleQuestion = libelleQuestion;
     }
 
     //Getters
@@ -151,7 +204,7 @@ public class Question extends AppCompatActivity {
         return this.idLaReponse;
     }
 
-    public int getIdLeTheme(){
+    public int getIdLeTheme() {
         return this.idLeTheme;
     }
 }
