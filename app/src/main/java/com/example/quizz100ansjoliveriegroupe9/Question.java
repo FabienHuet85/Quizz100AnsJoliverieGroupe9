@@ -171,36 +171,22 @@ public class Question extends AppCompatActivity {
         int idReponseSelec = getidreponsewithlibelle.getInt(0);
         String idStringReponseSelec = String.valueOf(idReponseSelec);
 
-        int j=0;
-        Boolean testDeLaReponse =false;
-        System.out.println("AVANT ENTRER BOULE");
-        while(j<tailleListBonneReponse || ((bonneReponse.get(j)).equals(idStringReponseSelec))){
-            System.out.println("j = "+j);
-            System.out.println("BLABLABLABLAZIUREBFPizub^zoeifzoi");
-            //System.out.println(bonneReponse.get(j));
+        for(int j=0; j<tailleListBonneReponse;j++){
+
             if((bonneReponse.get(j)).equals(idStringReponseSelec)){
-                testDeLaReponse = true;
-                break;
-            }else{
-                j++;
+                Toast toast = Toast.makeText(this, "Bonne réponse", Toast.LENGTH_SHORT);
+                toast.show();
+            }else {
+                Toast toast = Toast.makeText(this, "Mauvaise réponse", Toast.LENGTH_SHORT);
+                toast.show();
             }
 
-        }
-        System.out.println("apres ENTRER BOULE");
-        if(testDeLaReponse == true){
-            Toast toast = Toast.makeText(this, "Bonne réponse", Toast.LENGTH_SHORT);
-            toast.show();
-        }else {
-            Toast toast = Toast.makeText(this, "Mauvaise réponse", Toast.LENGTH_SHORT);
-            toast.show();
         }
             Bdd.close();
 
         System.out.println(reponse.get(0));
         System.out.println("----------------------");
         if(indicefenetresuivant == nbQuestions ) {
-            Bundle bundle = new Bundle();
-            
             startActivity(intent2);
         }else{
             startActivity(intent);
