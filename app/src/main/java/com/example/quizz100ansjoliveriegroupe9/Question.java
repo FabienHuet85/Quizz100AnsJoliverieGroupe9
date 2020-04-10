@@ -35,7 +35,7 @@ public class Question extends AppCompatActivity {
         final ArrayList<String> question = bundle.getStringArrayList("listeQuestion");
         final ArrayList<String> reponse = bundle.getStringArrayList("listeReponse");
         final int indiceFenetreOuverte = bundle.getInt("indice_fenetre");
-
+        int indice2 = indiceFenetreOuverte;
 
         System.out.println("//////////////////");
 
@@ -51,12 +51,15 @@ public class Question extends AppCompatActivity {
         question.get(indiceFenetreOuverte);
 
         TextViewQuestion.setText(question.get(indiceFenetreOuverte));
+        System.out.println("----------------/////////////");
+        System.out.println(indiceFenetreOuverte);
 
-        
-        rep1.setText(reponse.get(0));
-        rep2.setText(reponse.get(1));
-        rep3.setText(reponse.get(2));
-        rep4.setText(reponse.get(3));
+        indice2=indiceFenetreOuverte*4;
+
+        rep1.setText(reponse.get(indice2));
+        rep2.setText(reponse.get(indice2+1));
+        rep3.setText(reponse.get(indice2+2));
+        rep4.setText(reponse.get(indice2+3));
 
         View.OnClickListener ecouteurLieu = new View.OnClickListener() {
 
