@@ -36,6 +36,7 @@ public class Question extends AppCompatActivity {
         final int indiceFenetreOuverte = bundle.getInt("indice_fenetre");
         final  ArrayList<String> bonneReponse = bundle.getStringArrayList("listeBonneReponse");
 
+        final int nbQuestions = question.size();
         int indice2 = indiceFenetreOuverte;
 
         //test
@@ -51,8 +52,6 @@ public class Question extends AppCompatActivity {
         question.get(indiceFenetreOuverte);
 
         TextViewQuestion.setText(question.get(indiceFenetreOuverte));
-        System.out.println("----------------/////////////");
-        System.out.println(indiceFenetreOuverte);
 
         indice2=indiceFenetreOuverte*4;
 
@@ -71,16 +70,16 @@ public class Question extends AppCompatActivity {
                     //Boutons permettant d'ouvrir les différentes activitiés
                     case R.id.Reponse1:
 
-                        test(indiceFenetreOuverte, question, reponse, bonneReponse, rep1, bonneReponse);
+                        test(indiceFenetreOuverte, question, reponse, bonneReponse, rep1, bonneReponse, nbQuestions);
                         break;
                     case R.id.Reponse2:
-                        test(indiceFenetreOuverte, question, reponse, bonneReponse, rep2, bonneReponse);
+                        test(indiceFenetreOuverte, question, reponse, bonneReponse, rep2, bonneReponse, nbQuestions);
                         break;
                     case R.id.Reponse3:
-                        test(indiceFenetreOuverte, question, reponse, bonneReponse, rep3, bonneReponse);
+                        test(indiceFenetreOuverte, question, reponse, bonneReponse, rep3, bonneReponse, nbQuestions);
                         break;
                     case R.id.Reponse4:
-                        test(indiceFenetreOuverte, question, reponse, bonneReponse, rep4, bonneReponse);
+                        test(indiceFenetreOuverte, question, reponse, bonneReponse, rep4, bonneReponse, nbQuestions);
                         break;
                 }
             }
@@ -146,18 +145,16 @@ public class Question extends AppCompatActivity {
         return this.idLeTheme;
     }
 
-    protected void test (int indiceFenetreOuverte,ArrayList question, ArrayList reponse, ArrayList listeBonneReponse, Button rep, ArrayList bonneReponse){
+    protected void test (int indiceFenetreOuverte,ArrayList question, ArrayList reponse, ArrayList listeBonneReponse, Button rep, ArrayList bonneReponse, int nbQuestions){
         final int indicefenetresuivant = indiceFenetreOuverte+1;
         Intent intent = new Intent(Question.this, Question.class);
+        Intent intent2 = new Intent(Question.this, ChoixLieu.class);
         intent.putExtra("listeQuestion",question);
         intent.putExtra("listeReponse",reponse);
         intent.putExtra("indice_fenetre",indicefenetresuivant);
         intent.putExtra("listeBonneReponse",reponse);
 
         int tailleListBonneReponse = bonneReponse.size();
-
-        System.out.println(tailleListBonneReponse);
-
 
         for(int j=0; j<tailleListBonneReponse;j++){
             //Récupération du string de la réponse choisir
@@ -183,11 +180,16 @@ public class Question extends AppCompatActivity {
                 toast.show();
             }
 
+
+            Bdd.close();
         }
 
         System.out.println(reponse.get(0));
         System.out.println("----------------------");
-
-        startActivity(intent);
+        if(indicefenetresuivant == nbQuestions ) {
+            startActivity(intent2);
+        }else{
+            startActivity(intent);
+        }
     }
 }
