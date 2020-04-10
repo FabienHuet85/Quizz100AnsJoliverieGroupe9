@@ -156,37 +156,51 @@ public class Question extends AppCompatActivity {
 
         int tailleListBonneReponse = bonneReponse.size();
 
-        for(int j=0; j<tailleListBonneReponse;j++){
-            //Récupération du string de la réponse choisir
-            CharSequence reponseChoisie = rep.getText();
-            String reponseChoisieString = reponseChoisie.toString();
+        //Récupération du string de la réponse choisir
+        CharSequence reponseChoisie = rep.getText();
+        String reponseChoisieString = reponseChoisie.toString();
 
-            //Récupération de la BDD
-            BDAdapter Bdd = new BDAdapter(Question.this);
+        //Récupération de la BDD
+        BDAdapter Bdd = new BDAdapter(Question.this);
 
-            //Ouverture de la BDD
-            Bdd.open();
+        //Ouverture de la BDD
+        Bdd.open();
 
-            Cursor getidreponsewithlibelle = Bdd.getIdReponsesWithLibelleReponse(reponseChoisieString);
-            getidreponsewithlibelle.moveToNext();
-            int idReponseSelec = getidreponsewithlibelle.getInt(0);
-            String idStringReponseSelec = String.valueOf(idReponseSelec);
+        Cursor getidreponsewithlibelle = Bdd.getIdReponsesWithLibelleReponse(reponseChoisieString);
+        getidreponsewithlibelle.moveToNext();
+        int idReponseSelec = getidreponsewithlibelle.getInt(0);
+        String idStringReponseSelec = String.valueOf(idReponseSelec);
 
+        int j=0;
+        Boolean testDeLaReponse =false;
+        System.out.println("AVANT ENTRER BOULE");
+        while(j<tailleListBonneReponse || ((bonneReponse.get(j)).equals(idStringReponseSelec))){
+            System.out.println("j = "+j);
+            System.out.println("BLABLABLABLAZIUREBFPizub^zoeifzoi");
+            //System.out.println(bonneReponse.get(j));
             if((bonneReponse.get(j)).equals(idStringReponseSelec)){
-                Toast toast = Toast.makeText(this, "Bonne réponse", Toast.LENGTH_SHORT);
-                toast.show();
+                testDeLaReponse = true;
+                break;
             }else{
-                Toast toast = Toast.makeText(this, "Mauvaise réponse", Toast.LENGTH_SHORT);
-                toast.show();
+                j++;
             }
 
-
-            Bdd.close();
         }
+        System.out.println("apres ENTRER BOULE");
+        if(testDeLaReponse == true){
+            Toast toast = Toast.makeText(this, "Bonne réponse", Toast.LENGTH_SHORT);
+            toast.show();
+        }else {
+            Toast toast = Toast.makeText(this, "Mauvaise réponse", Toast.LENGTH_SHORT);
+            toast.show();
+        }
+            Bdd.close();
 
         System.out.println(reponse.get(0));
         System.out.println("----------------------");
         if(indicefenetresuivant == nbQuestions ) {
+            Bundle bundle = new Bundle();
+            
             startActivity(intent2);
         }else{
             startActivity(intent);
