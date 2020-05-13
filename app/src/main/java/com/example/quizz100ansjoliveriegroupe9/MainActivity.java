@@ -18,6 +18,9 @@ import com.example.quizz100ansjoliveriegroupe9.data.InsertData;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -50,17 +53,46 @@ public class MainActivity extends AppCompatActivity {
                         //on récupère le EditText
                         EditText editTextPrenom = (EditText) findViewById (R.id.Name);
                         //on récupèrer le prénom
-                        System.out.println("////////////////////////////////////////////");
                         prenom = editTextPrenom.getText().toString();
-                        System.out.println(prenom);
-                        System.out.println("//////////////////////////////");
                         if(prenom.equals("")){
                             TextView errormessage = (TextView) findViewById (R.id.ErrorMessage);
                             errormessage.setText("Veuillez renseigner votre prénom !");
 
 
                         }else{
+                            //Création d'une liste pour les elément dans le spinner
+                            ArrayList<String> spinnerTheme = new ArrayList<>();
+                            BDAdapter LieuBdd = new BDAdapter(MainActivity.this);
+
+                            //Ouverture de la BDD
+                            LieuBdd.open();
+
+                            //Curseur pour obtenir touts les thèmes
+                            Cursor cursor = LieuBdd.getAllLibelleTheme();
+
+                            //Boucle pour l'import des valeurs dans la liste déroulante :
+                            if(cursor.getCount() > 0){
+                                while (cursor.moveToNext()){
+                                    spinnerTheme.add(cursor.getString(cursor.getColumnIndex("libelle_theme")));
+                                }
+                            }
+
+                            //fermeture de la bdd
+                            LieuBdd.close();
+
+                            //Déclaration du bundle pour pouvoir envoyer les données dedans
+                            Bundle bundle = new Bundle();
+
+                            //Déclaration de l'intent
                             Intent intent = new Intent(MainActivity.this, ChoixLieu.class);
+
+                            bundle.putStringArrayList("listeTheme ", spinnerTheme);
+                            intent.putExtra("listeTheme",spinnerTheme);
+
+                            //insertion des données à passer dans le intent
+                            intent.putExtras(bundle);
+
+
                             startActivity(intent);
                             break;
                         }

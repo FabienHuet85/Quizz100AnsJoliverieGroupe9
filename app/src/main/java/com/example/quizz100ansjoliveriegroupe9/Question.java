@@ -33,6 +33,9 @@ public class Question extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         final ArrayList<String> question = bundle.getStringArrayList("listeQuestion");
         final ArrayList<String> reponse = bundle.getStringArrayList("listeReponse");
+        final ArrayList<String> spinnerTheme = bundle.getStringArrayList("listeTheme");
+
+
         final int indiceFenetreOuverte = bundle.getInt("indice_fenetre");
         final  ArrayList<String> bonneReponse = bundle.getStringArrayList("listeBonneReponse");
 
@@ -70,16 +73,16 @@ public class Question extends AppCompatActivity {
                     //Boutons permettant d'ouvrir les différentes activitiés
                     case R.id.Reponse1:
 
-                        test(indiceFenetreOuverte, question, reponse, bonneReponse, rep1, bonneReponse, nbQuestions);
+                        test(indiceFenetreOuverte, question, reponse, bonneReponse, rep1, bonneReponse, nbQuestions, spinnerTheme);
                         break;
                     case R.id.Reponse2:
-                        test(indiceFenetreOuverte, question, reponse, bonneReponse, rep2, bonneReponse, nbQuestions);
+                        test(indiceFenetreOuverte, question, reponse, bonneReponse, rep2, bonneReponse, nbQuestions, spinnerTheme);
                         break;
                     case R.id.Reponse3:
-                        test(indiceFenetreOuverte, question, reponse, bonneReponse, rep3, bonneReponse, nbQuestions);
+                        test(indiceFenetreOuverte, question, reponse, bonneReponse, rep3, bonneReponse, nbQuestions, spinnerTheme);
                         break;
                     case R.id.Reponse4:
-                        test(indiceFenetreOuverte, question, reponse, bonneReponse, rep4, bonneReponse, nbQuestions);
+                        test(indiceFenetreOuverte, question, reponse, bonneReponse, rep4, bonneReponse, nbQuestions, spinnerTheme);
                         break;
                 }
             }
@@ -145,12 +148,13 @@ public class Question extends AppCompatActivity {
         return this.idLeTheme;
     }
 
-    protected void test (int indiceFenetreOuverte,ArrayList question, ArrayList reponse, ArrayList listeBonneReponse, Button rep, ArrayList bonneReponse, int nbQuestions){
+    protected void test (int indiceFenetreOuverte,ArrayList question, ArrayList reponse, ArrayList listeBonneReponse, Button rep, ArrayList bonneReponse, int nbQuestions, ArrayList spinnerTheme){
         final int indicefenetresuivant = indiceFenetreOuverte+1;
         Intent intent = new Intent(Question.this, Question.class);
         Intent intent2 = new Intent(Question.this, ChoixLieu.class);
         intent.putExtra("listeQuestion",question);
         intent.putExtra("listeReponse",reponse);
+        intent.putExtra("listeTheme",spinnerTheme);
         intent.putExtra("indice_fenetre",indicefenetresuivant);
         intent.putExtra("listeBonneReponse",reponse);
 
@@ -171,23 +175,41 @@ public class Question extends AppCompatActivity {
         int idReponseSelec = getidreponsewithlibelle.getInt(0);
         String idStringReponseSelec = String.valueOf(idReponseSelec);
 
-        for(int j=0; j<tailleListBonneReponse;j++){
-
+        int j = 0;
+        int vraiOuFaux = 0; //Si valeur = 0 : Faux -- Si valeur = 1 : Vrai
+        while((j<tailleListBonneReponse)&&(vraiOuFaux==0)){
             if((bonneReponse.get(j)).equals(idStringReponseSelec)){
-                Toast toast = Toast.makeText(this, "Bonne réponse", Toast.LENGTH_SHORT);
-                toast.show();
-            }else {
-                Toast toast = Toast.makeText(this, "Mauvaise réponse", Toast.LENGTH_SHORT);
-                toast.show();
+                vraiOuFaux = 1;
+            }else{
+                j++;
             }
-
         }
-            Bdd.close();
+        if (vraiOuFaux==0){
+            Toast toast = Toast.makeText(this, "Mauvaise réponse", Toast.LENGTH_SHORT);
+            toast.show();
+        }else{
+            Toast toast = Toast.makeText(this, "Bonne réponse", Toast.LENGTH_SHORT);
+            toast.show();
+        }
+        Bdd.close();
 
         System.out.println(reponse.get(0));
         System.out.println("----------------------");
+
+
         if(indicefenetresuivant == nbQuestions ) {
+
+            //Déclaration du bundle pour pouvoir envoyer les données dedans
+            Bundle bundle = new Bundle();
+
+            bundle.putStringArrayList("listeTheme ", spinnerTheme);
+            intent2.putExtra("listeTheme",spinnerTheme);
+
+            //insertion des données à passer dans le intent
+            intent2.putExtras(bundle);
+
             startActivity(intent2);
+            System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaa");
         }else{
             startActivity(intent);
         }
